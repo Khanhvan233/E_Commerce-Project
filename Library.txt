@@ -1,0 +1,3 @@
+npm install styled-components
+npm install antd
+npm install @reduxjs/toolkit
