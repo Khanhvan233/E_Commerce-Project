@@ -1,3 +1,5 @@
 npm install styled-components
 npm install antd
 npm install @reduxjs/toolkit
+npm i react-slick
+npm install slick-carousel
