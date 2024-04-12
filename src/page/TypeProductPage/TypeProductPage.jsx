@@ -2,8 +2,8 @@ import React, { Fragment } from 'react'
 import CardComponent from '../../components/CardComponent/CardComponent'
 import NavbarComponent from '../../components/NavbarComponent/NavbarComponent'
 import { Row, Pagination, Col } from 'antd'
-import { WrapperProducts } from '../HomePage/style'
-import { WrapperNavbar } from '../../components/TypeProduct/style'
+import { WrapperProducts, WrapperNavbar } from './style'
+
 
 const TypeProductPage = () => {
   const onChange = () => {}
