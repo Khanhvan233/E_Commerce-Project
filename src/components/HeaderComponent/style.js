@@ -3,10 +3,11 @@ import styled from "styled-components";
 
 export const WrapperHeader = styled(Row)`
     background-color: rgb(26,148,255);
-    padding: 10px 120px;
+    padding: 10px 0px;
     align-items: center;
     gap: 16px;
     flex-wrap: nowrap;
+    width: 1910px;
 `
 export const WrapperTextHeader = styled.span`
     font-size: 25px;
