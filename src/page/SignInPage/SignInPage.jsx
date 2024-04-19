@@ -12,7 +12,7 @@ const SignInPage = () => {
       <div style={{width: '800px', height: '445px', borderRadius: '6px', background: '#fff', display: 'flex'}}>
         <WrapperContainerLeft>
           <h1>Xin chào</h1>
-          <p>Đăng nhập hoặc Tạo tài khoản</p>
+          <p>Đăng nhập bằng tài khoản Admin</p>
           <InputForm style={{marginBottom: '10px'}} placeholder='abc@gmail.com'/>
           <div style={{position: 'relative'}}>
             <span style={{
@@ -45,10 +45,6 @@ const SignInPage = () => {
             styleTextButton={{color: '#fff', fontSize: '15px', fontWeight: '700'}}
           >
           </ButtonComponent>
-          <p>
-            <WrapperTextLight>Quên mật khẩu</WrapperTextLight>
-          </p>
-          <p>Chưa có tài khoản? <WrapperTextLight>Tạo tài khoản</WrapperTextLight></p>
         </WrapperContainerLeft>
         <WrapperContainerRight>
           <Image src={imageLogo} preview ={false} alt='image-logo' height='203px' width='203px'/>

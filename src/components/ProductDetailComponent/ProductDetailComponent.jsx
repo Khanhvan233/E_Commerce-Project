@@ -35,12 +35,17 @@ const ProductDetailComponent = () => {
             <StarFilled style={{fontSize: '10px', color:'rgb(253,216,54)'}}/>
             <StarFilled style={{fontSize: '10px', color:'rgb(253,216,54)'}}/>
             <StarFilled style={{fontSize: '10px', color:'rgb(253,216,54)'}}/>
+            <StarFilled style={{fontSize: '10px', color:'rgb(253,216,54)'}}/>
+            <StarFilled style={{fontSize: '10px', color:'rgb(253,216,54)'}}/>
             <WrapperStyleTextSell>| Đã Bán Được 100</WrapperStyleTextSell>
           </div>
           <WrapperPriceProduct>
             <WrapperPriceTextProduct>200.000</WrapperPriceTextProduct>
           </WrapperPriceProduct>
           <WrapperAddressProduct>
+            <span>Giao từ</span>
+            <span className='address'>      Quận 1, P.Bến Nghé, Hồ Chí Minh   </span>
+            <div></div>
             <span>Giao đến</span>
             <span className='address'>      Quận 1, P.Bến Nghé, Hồ Chí Minh   </span>
             <span className='change'>   Đổi địa chỉ </span>

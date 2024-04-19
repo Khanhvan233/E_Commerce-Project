@@ -15,7 +15,7 @@ import ButtonInputSearch from '../ButtonInputSearch/ButtonInputSearch';
 
 const HeaderComponent = () => {
   return (
-    <div style={{width: '100%', background:'rgb(26, 148,, 255)', display:'flex', justifyContent:'center'}}>
+    <div style={{width: '100%', background:'rgb(153, 51,, 255)', display:'flex', justifyContent:'center'}}>
       <WrapperHeader>
         <Col span={5} style={{display: 'flex', gap:'20px', alignItems:'center', marginLeft: '40px'}}>
           <WrapperTextHeader>Rèm Cửa</WrapperTextHeader>
