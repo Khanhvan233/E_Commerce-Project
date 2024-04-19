@@ -1,6 +1,9 @@
 import React from 'react'
-import { Badge, Col } from 'antd';
+import { Badge, Col} from 'antd';
 import { WrapperHeader, WrapperHeaderAccount, WrapperTextHeader, WrapperTextHeaderSmall } from './style';
+import {
+  PhoneOutlined 
+} from '@ant-design/icons';
 // import Search from 'antd/lib/transfer/search'
 import {
   UserOutlined,
@@ -14,8 +17,8 @@ const HeaderComponent = () => {
   return (
     <div style={{width: '100%', background:'rgb(26, 148,, 255)', display:'flex', justifyContent:'center'}}>
       <WrapperHeader>
-        <Col span={5} style={{display: 'flex', gap:'20px', alignItems:'center'}}>
-          <WrapperTextHeader>Rèm Cửa Violet</WrapperTextHeader>
+        <Col span={5} style={{display: 'flex', gap:'20px', alignItems:'center', marginLeft: '40px'}}>
+          <WrapperTextHeader>Rèm Cửa</WrapperTextHeader>
         </Col>
         <Col span={13}>
           <ButtonInputSearch
@@ -26,16 +29,15 @@ const HeaderComponent = () => {
          />
         </Col>
         <Col span={6} style={{display: 'flex', gap:'54px', alignItems:'center'}}>
-          <WrapperHeaderAccount>
-            <UserOutlined style={{fontSize: '30px'}}/>
+          { <WrapperHeaderAccount>
+            <PhoneOutlined style={{fontSize: '30px'}}/>
             <div>
-              <WrapperTextHeaderSmall>Đăng nhập/Đăng ký</WrapperTextHeaderSmall>
+              <WrapperTextHeaderSmall style={{fontSize: '13px'}}>Liên hệ chăm sóc khách hàng</WrapperTextHeaderSmall>
               <div>
-                <WrapperTextHeaderSmall>Tài khoản</WrapperTextHeaderSmall>
-                <CaretDownOutlined />  
+                <WrapperTextHeaderSmall style={{fontSize: '13px'}}>0123456789</WrapperTextHeaderSmall> 
               </div>
             </div>
-          </WrapperHeaderAccount>
+          </WrapperHeaderAccount>}
           <div>
             <Badge count={3} size='small'>
               <ShoppingCartOutlined style={{fontSize: '30px', color: '#fff'}} />  
