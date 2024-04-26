@@ -1,5 +1,7 @@
 import styled from 'styled-components'
-import { ButtonComponent } from '../../components/ButtonComponent/ButtonComponent'
+import ButtonComponent from '../../components/ButtonComponent/ButtonComponent'
+
+
 
 export const WrapperTypeProduct = styled.div`
     font-size: 14px;

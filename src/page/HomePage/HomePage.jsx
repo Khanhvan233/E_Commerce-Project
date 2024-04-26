@@ -10,7 +10,6 @@ import slider6 from '../../assets/images/slider6.ws.jpg'
 import SliderComponent from '../../components/SliderComponent/SliderComponet'
 import CardComponent from '../../components/CardComponent/CardComponent.jsx'
 import NavbarComponent from '../../components/NavbarComponent/NavbarComponent.jsx'
-import { ButtonComponent } from '../../components/ButtonComponent/ButtonComponent.jsx'
 
 const HomePage = () => {
   const arr =['Rèm Cửa', 'Rem Ngủ', 'Rèm Cầu Vồng','Rèm Nhà Tắm']

@@ -1,36 +1,59 @@
 import React, { useState } from 'react'
 import { WrapperContainerLeft, WrapperContainerRight, WrapperTextLight } from './style'
 import InputForm from '../../components/InputForm/InputForm'
-import { ButtonComponent } from '../../components/ButtonComponent/ButtonComponent'
 import imageLogo from '../../assets/images/logo-login.jpg'
 import { EyeFilled, EyeInvisibleFilled } from '@ant-design/icons'
 import { Image } from 'antd'
+import ButtonComponent from '../../components/ButtonComponent/ButtonComponent'
+
+
 const SignInPage = () => {
+
   const [isShowPassword, setIsShowPassword] = useState(false)
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleOnchangeEmail = (value) => {
+    setEmail(value)
+  }
+  const handleOnchangePassword = (value) => {
+    setPassword(value)
+  }
+  const handleSignIn = () => {
+    console.log('admin, email, password')
+  }
+
   return (
     <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0, 0, 0, 0.53)', height: '100vh'}}>
       <div style={{width: '800px', height: '445px', borderRadius: '6px', background: '#fff', display: 'flex'}}>
         <WrapperContainerLeft>
           <h1>Xin chào</h1>
           <p>Đăng nhập bằng tài khoản Admin</p>
-          <InputForm style={{marginBottom: '10px'}} placeholder='abc@gmail.com'/>
+          <InputForm style={{marginBottom: '10px'}} placeholder='Username' value={email} onChange={handleOnchangeEmail} />
           <div style={{position: 'relative'}}>
-            <span style={{
-              zIndex: 10,
-              position: 'absolute',
-              top: '15px',
-              right: '8px',
-            }}>{
-              isShowPassword ? (
-                <EyeFilled/>
-              ):(
-                <EyeInvisibleFilled/>
-              )
-            }
+            <span 
+              onClick={() => setIsShowPassword(!isShowPassword)}
+              style={{
+                zIndex: 10,
+                position: 'absolute',
+                top: '15px',
+                right: '8px',
+              }}>{
+                isShowPassword ? (
+                  <EyeFilled/>
+                ):(
+                  <EyeInvisibleFilled/>
+                )
+              }
             </span>
-              <InputForm placeholder='password' type={isShowPassword ? "text" : "password"}/>
+              <InputForm 
+                placeholder='password' type={isShowPassword ? "text" : "Password"} 
+                value={password} onChange={handleOnchangePassword}
+              />
           </div>
           <ButtonComponent
+            disabled={!email.length || !password.length}
+            onClick={handleSignIn}
             bordered ={false}
             size={40}
             styleButton={{
@@ -48,7 +71,7 @@ const SignInPage = () => {
         </WrapperContainerLeft>
         <WrapperContainerRight>
           <Image src={imageLogo} preview ={false} alt='image-logo' height='203px' width='203px'/>
-          <h4>Mua sắm tại violet</h4>
+          <h4>Hệ thống trang web thương mại điện tử</h4>
         </WrapperContainerRight>
       </div>
     </div>

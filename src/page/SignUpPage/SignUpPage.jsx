@@ -1,11 +1,12 @@
 import React from 'react'
 import { WrapperContainerLeft, WrapperContainerRight, WrapperTextLight } from './style'
 import InputForm from '../../components/InputForm/InputForm'
-import { ButtonComponent } from '../../components/ButtonComponent/ButtonComponent'
 import imageLogo from '../../assets/images/logo-login.jpg'
 import { Image } from 'antd'
 import { useState } from 'react'
 import { EyeFilled, EyeInvisibleFilled } from '@ant-design/icons'
+import ButtonComponent from '../../components/ButtonComponent/ButtonComponent'
+
 
 const SignUpPage = () => {
   const [isShowPassword, setIsShowPassword] = useState(false)

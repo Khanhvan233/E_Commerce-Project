@@ -3,10 +3,12 @@ import {Input} from 'antd'
 import { WrapperInputStyle } from './style'
 
 const InputForm = (props) => {
-    const [valueInput, setvalueInput] =useState('')
     const {placeholder ='Nhap text', ...rests} =props
+    const handleOnchangeInput =(e) =>{
+      props.onChange(e.target.value)
+    }
   return (
-        <WrapperInputStyle placeholder= {placeholder} valueInput = {valueInput} {...rests}/>
+        <WrapperInputStyle placeholder= {placeholder} value = {props.value} {...rests} onChange={handleOnchangeInput}/>
   )
 }
 
