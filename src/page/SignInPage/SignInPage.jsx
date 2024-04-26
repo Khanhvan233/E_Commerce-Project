@@ -52,7 +52,7 @@ const SignInPage = () => {
               />
           </div>
           <ButtonComponent
-            disabled={!email.length || !password.length}
+            disabled={!email.length || !password.length} //no active log in 
             onClick={handleSignIn}
             bordered ={false}
             size={40}
