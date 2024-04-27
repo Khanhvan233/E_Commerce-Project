@@ -5,6 +5,8 @@ import imageLogo from '../../assets/images/logo-login.jpg'
 import { EyeFilled, EyeInvisibleFilled } from '@ant-design/icons'
 import { Image } from 'antd'
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent'
+import axios from 'axios'
+import * as message from '../../components/Message/Message'
 
 
 const SignInPage = () => {
@@ -20,8 +22,25 @@ const SignInPage = () => {
     setPassword(value)
   }
   const handleSignIn = () => {
-    console.log('admin, email, password')
+    axios.get('http://127.0.0.1:7777/login', {
+      params: {
+        username: email,
+        password: password
+      }
+    })
+    .then(response => {
+      if (response.status === 200) {
+        message.success('Login successful')
+      } else {
+        message.error('Login failure')
+      }
+    })
+    .catch(error => {
+      message.warning('Fail to login because of error')
+      // Xử lý lỗi hoặc hiển thị thông báo lỗi  
+    })
   }
+  
 
   return (
     <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0, 0, 0, 0.53)', height: '100vh'}}>
