@@ -32,11 +32,11 @@ const SignInPage = () => {
       if (response.status === 200) {
         message.success('Login successful')
       } else {
-        message.error('Login failure')
+        message.error('We couldn’t find an account matching the email and password you entered. Please check your email and password and try again.')
       }
     })
     .catch(error => {
-      message.warning('Fail to login because of error')
+      message.warning('Fail to login because of some error')
       // Xử lý lỗi hoặc hiển thị thông báo lỗi  
     })
   }
