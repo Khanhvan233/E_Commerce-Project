@@ -22,7 +22,7 @@ const SignInPage = () => {
     setPassword(value)
   }
   const handleSignIn = () => {
-    axios.get('http://127.0.0.1:7777/login', {
+    axios.get(`${process.env.REACT_APP_API_URL}/login`, {
       params: {
         username: email,
         password: password
