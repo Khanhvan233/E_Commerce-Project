@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
-import { WrapperContainerLeft, WrapperContainerRight, WrapperTextLight } from './style'
+import { Video, WrapperContainerLeft, WrapperContainerRight, WrapperTextLight } from './style'
 import InputForm from '../../components/InputForm/InputForm'
-import imageLogo from '../../assets/images/logo-login.jpg'
 import { EyeFilled, EyeInvisibleFilled } from '@ant-design/icons'
-import { Image } from 'antd'
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent'
 import axios from 'axios'
 import * as message from '../../components/Message/Message'
+import { useNavigate } from 'react-router-dom';
 
 
 const SignInPage = () => {
 
   const [isShowPassword, setIsShowPassword] = useState(false)
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const navigate = useNavigate()
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleOnchangeEmail = (value) => {
     setEmail(value)
@@ -30,7 +31,9 @@ const SignInPage = () => {
     })
     .then(response => {
       if (response.status === 200) {
+        setIsLoggedIn(true) //oke
         message.success('Login successful')
+        navigate('/system/admin')
       } else {
         message.error('We couldn’t find an account matching the email and password you entered. Please check your email and password and try again.')
       }
@@ -40,7 +43,6 @@ const SignInPage = () => {
       // Xử lý lỗi hoặc hiển thị thông báo lỗi  
     })
   }
-  
 
   return (
     <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0, 0, 0, 0.53)', height: '100vh'}}>
@@ -56,7 +58,7 @@ const SignInPage = () => {
                 zIndex: 10,
                 position: 'absolute',
                 top: '15px',
-                right: '8px',
+                right: '8px', 
               }}>{
                 isShowPassword ? (
                   <EyeFilled/>
@@ -89,8 +91,7 @@ const SignInPage = () => {
           </ButtonComponent>
         </WrapperContainerLeft>
         <WrapperContainerRight>
-          <Image src={imageLogo} preview ={false} alt='image-logo' height='203px' width='203px'/>
-          <h4>Hệ thống trang web thương mại điện tử</h4>
+        <Video src={require('../../assets/videos/login.mp4')} autoPlay loop muted />
         </WrapperContainerRight>
       </div>
     </div>

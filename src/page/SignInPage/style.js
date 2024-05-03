@@ -15,7 +15,15 @@ export const WrapperContainerRight = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 4px;
+    position: relative;
+    overflow: hidden; 
 `
+export const Video = styled.video`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`
+
 export const WrapperTextLight = styled.span`
     color: rgb(13, 92, 182);
     font-size: 13px;

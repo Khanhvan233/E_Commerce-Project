@@ -1,10 +1,10 @@
+import AdminPage from "../page/AdminPage/AdminPage";
 import HomePage from "../page/HomePage/HomePage";
 import NotFoundPage from "../page/NotFoundPage/NotFoundPage";
 import OrderPage from "../page/OrderPage/OrderPage";
 import ProductDetailPage from "../page/ProductDetailPage/ProductDetailPage";
 import ProductsPage from "../page/ProductsPage/ProductsPage";
 import SignInPage from "../page/SignInPage/SignInPage";
-import SignUpPage from "../page/SignUpPage/SignUpPage";
 import TypeProductPage from "../page/TypeProductPage/TypeProductPage";
 
 
@@ -34,6 +34,7 @@ export const routes =[
         path: '/type',
         page: TypeProductPage,
         isShowHeader: true
+        
     },
     {
         path: '/product-details',
@@ -43,6 +44,11 @@ export const routes =[
     {
         path: '/admin',
         page: SignInPage,
+        isShowHeader: true
+    },
+    {
+        path: '/system/admin',
+        page: AdminPage,
         isShowHeader: true
     },
 ]
