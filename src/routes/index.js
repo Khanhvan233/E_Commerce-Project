@@ -12,18 +12,21 @@ export const routes =[
     {
         path: '/',
         page: HomePage,
-        isShowHeader: true
+        isShowHeader: true,
+        isShowFooter: true
 
     },
     {
         path: '/order',
         page: OrderPage,
-        isShowHeader: true
+        isShowHeader: true,
+        isShowFooter: true
     },
     {
         path: '/products',
         page: ProductsPage,
-        isShowHeader: true
+        isShowHeader: true,
+        isShowFooter: true
     },
     {
         path: '*',
@@ -33,22 +36,26 @@ export const routes =[
     {
         path: '/type',
         page: TypeProductPage,
-        isShowHeader: true
+        isShowHeader: true,
+        isShowFooter: true
         
     },
     {
         path: '/product-details',
         page: ProductDetailPage,
-        isShowHeader: true
+        isShowHeader: true,
+        isShowFooter: true
     },
     {
         path: '/admin',
         page: SignInPage,
-        isShowHeader: true
+        isShowHeader: true,
+        isShowFooter: true
     },
     {
         path: '/system/admin',
         page: AdminPage,
-        isShowHeader: true
+        isShowHeader: false,
+        isShowFooter: true
     },
 ]

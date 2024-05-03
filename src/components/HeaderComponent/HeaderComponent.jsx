@@ -1,18 +1,15 @@
 import React from 'react'
 import { Badge, Col} from 'antd';
 import { WrapperHeader, WrapperHeaderAccount, WrapperTextHeader, WrapperTextHeaderSmall } from './style';
-import {
-  PhoneOutlined 
-} from '@ant-design/icons';
-// import Search from 'antd/lib/transfer/search'
+import ButtonInputSearch from '../ButtonInputSearch/ButtonInputSearch';
+import { useNavigate } from 'react-router-dom';
 import {
   UserOutlined,
   CaretDownOutlined,
+  PhoneOutlined,
   ShoppingCartOutlined,
-
 } from '@ant-design/icons';
-import ButtonInputSearch from '../ButtonInputSearch/ButtonInputSearch';
-import { useNavigate } from 'react-router-dom';
+
 
 const HeaderComponent = () => {
   const navigate = useNavigate()
@@ -27,12 +24,12 @@ const HeaderComponent = () => {
       <WrapperHeader>
         <Col span={5} style={{display: 'flex', gap:'20px', alignItems:'center', marginLeft: '40px'}}>
             <div onClick={handleNavigateMain} style={{cursor: 'pointer'}}>
-              <WrapperTextHeader>Rèm Cửa</WrapperTextHeader>
+              <WrapperTextHeader>Rèm Cửa Đại Việt</WrapperTextHeader>
             </div>
         </Col>
         <Col span={13}>
           <ButtonInputSearch
-            size="large"
+            size="large"  
             bordered="false"
             textButton="Tìm kiếm"
             placeholder="input search text"
@@ -41,6 +38,7 @@ const HeaderComponent = () => {
         <Col span={6} style={{display: 'flex', gap:'54px', alignItems:'center'}}>
           { <WrapperHeaderAccount>
             <PhoneOutlined style={{fontSize: '30px'}}/>
+            
             <div onClick={handleNavigateLogin} style={{cursor: 'pointer'}}>
               <WrapperTextHeaderSmall style={{fontSize: '13px'}}>Liên hệ chăm sóc khách hàng</WrapperTextHeaderSmall>
               <div>

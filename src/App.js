@@ -6,17 +6,6 @@ import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 function App() {
 
-//test thử fetch API 
-  
-  // useEffect(() => {
-  //   fetchAPI()
-  // }, [])
-  // const fetchAPI = async () =>{
-  //   const res = axios.get(`${process.env.REACT_APP_API_URL}/product_get`)
-  //   return res.data
-  // }
-  // const query = useQuery({ queryKey: ['todos'], queryFn: fetchAPI })
-  // console.log('querry', query)
 
   return (
     <div>

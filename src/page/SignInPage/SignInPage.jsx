@@ -46,7 +46,7 @@ const SignInPage = () => {
 
   return (
     <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0, 0, 0, 0.53)', height: '100vh'}}>
-      <div style={{width: '800px', height: '445px', borderRadius: '6px', background: '#fff', display: 'flex'}}>
+      <div style={{width: '1000px', height: '600px', borderRadius: '6px', background: '#fff', display: 'flex'}}>
         <WrapperContainerLeft>
           <h1>Xin chào</h1>
           <p>Đăng nhập bằng tài khoản Admin</p>
