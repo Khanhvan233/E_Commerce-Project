@@ -34,7 +34,7 @@ const TypeProductPage = () => {
                 <CardComponent/>  
                 <CardComponent/>  
             </WrapperProducts>
-            <Pagination defaultCurrent={2} total={100} onChange={onChange} style={{textAlign: 'center', marginTop: '10px'}} />
+            <Pagination defaultCurrent={2} total={100} onChange={onChange} style={{textAlign: 'center', marginTop: '20px', marginBottom: '20px'}} />
           </Col>
         </Row>
       </div>

@@ -10,8 +10,8 @@ export const WrapperFooter = styled(Row)`
     width: 1930px;
 `
 export const WrapperTextFooter= styled.span`
-    font-size: 25px;
-    color: #fff;
+    font-size: 13px;
+    color: rgb( 172, 59, 97);
     font-weight: bold;
     text-align: left;
 `

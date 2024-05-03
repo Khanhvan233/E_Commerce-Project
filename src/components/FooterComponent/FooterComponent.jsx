@@ -13,13 +13,29 @@ import {
 
 const FooterComponent = () => {
   return (
-    <div style={{width: '100%', background:'rgb(153, 51,, 255)', display:'flex', justifyContent:'center',marginTop: '50px',left:'0px', bottom: '0px'}}>
+    <div style={{width: '100%', background:'rgb(153, 51,, 255)', display:'flex', justifyContent:'center' ,left:'0px', bottom: '0px'}}>
         <WrapperFooter>
             <Col span={6} style={{display: 'flex', gap:'20px', alignItems:'center', marginLeft: '40px', padding:'20px'}}>
                 <div>
-                <WrapperTextFooter>Rèm Cửa Đại Việt</WrapperTextFooter>
+                <WrapperTextFooter>Chăm sóc khách hàng</WrapperTextFooter>
                 </div>
             </Col>
+            <Col span={6} style={{display: 'flex', gap:'20px', alignItems:'center', marginLeft: '40px', padding:'20px'}}>
+                <div>
+                <WrapperTextFooter>Về Đại Việt</WrapperTextFooter>
+                </div>
+            </Col>
+            <Col span={6} style={{display: 'flex', gap:'20px', alignItems:'center', marginLeft: '40px', padding:'20px'}}>
+                <div>
+                <WrapperTextFooter>Thông tin liên hệ</WrapperTextFooter>
+                </div>
+            </Col>
+            <Col span={6} style={{display: 'flex', gap:'20px', alignItems:'center', marginLeft: '40px', padding:'20px'}}>
+                <div>
+                <WrapperTextFooter>Kết nối với chúng tôi</WrapperTextFooter>
+                </div>
+            </Col>
+
         </WrapperFooter>
     </div>
   )

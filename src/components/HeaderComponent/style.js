@@ -11,19 +11,19 @@ export const WrapperHeader = styled(Row)`
 `
 export const WrapperTextHeader = styled.span`
     font-size: 25px;
-    color: #fff;
+    color: rgb( 172, 59, 97);
     font-weight: bold;
     text-align: left;
 `
 export const WrapperHeaderAccount = styled.div`
     display: flex;
     algin-items: center;
-    color: #fff;
+    color: rgb( 172, 59, 97);
     gap: 10px;
     font-size: 12px;
 `
 export const WrapperTextHeaderSmall = styled.span`
     font-size: 12px;
-    color: #fff;
+    color: rgb( 172, 59, 97);
     white-space: nowrap;
 `

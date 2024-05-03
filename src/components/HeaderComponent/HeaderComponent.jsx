@@ -4,8 +4,6 @@ import { WrapperHeader, WrapperHeaderAccount, WrapperTextHeader, WrapperTextHead
 import ButtonInputSearch from '../ButtonInputSearch/ButtonInputSearch';
 import { useNavigate } from 'react-router-dom';
 import {
-  UserOutlined,
-  CaretDownOutlined,
   PhoneOutlined,
   ShoppingCartOutlined,
 } from '@ant-design/icons';
@@ -48,7 +46,7 @@ const HeaderComponent = () => {
           </WrapperHeaderAccount>}
           <div>
             <Badge count={3} size='small'>
-              <ShoppingCartOutlined style={{fontSize: '30px', color: '#fff'}} />  
+              <ShoppingCartOutlined style={{fontSize: '30px', color: 'rgb( 172, 59, 97)'}} />  
             </Badge>
             <WrapperTextHeaderSmall>Giỏ hàng</WrapperTextHeaderSmall>
           </div>

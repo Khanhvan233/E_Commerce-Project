@@ -25,10 +25,14 @@ const HomePage = () => {
         </WrapperTypeProduct>
         </div>
         <div className='body' style={{ width: '100%', backgroundColor: '#efefef', }}>
-        <div id="container" style={{ height: '1000px', width: '1660px', margin: '0 auto' }}>
+        <div id="container" style={{ height: '100%', width: '1660px', margin: '0 auto' }}>
           
           <SliderComponent arrImages={[slider1, slider2, slider3, slider4, slider6]} />
             <WrapperProducts>
+              <CardComponent />
+              <CardComponent />
+              <CardComponent />
+              <CardComponent />
               <CardComponent />
               <CardComponent />
               <CardComponent />
@@ -49,7 +53,9 @@ const HomePage = () => {
                   color: 'rgb(11, 116, 229)',
                   width: '240px',
                   height: '38px',
-                  borderRadius: '4px'
+                  borderRadius: '4px',
+                  marginTop: '10px',
+                  marginBottom: '10px'
                 }}
                 styleTextButton={{fontWeight: 500}}
               />
