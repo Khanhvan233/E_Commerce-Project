@@ -5,9 +5,10 @@ export const WrapperFooter = styled(Row)`
     background-color: rgb( 238, 226, 220);
     padding: 10px 0px;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
     flex-wrap: nowrap;
     width: 1930px;
+    height: 300px;
 `
 export const WrapperTextFooter= styled.span`
     font-size: 13px;
