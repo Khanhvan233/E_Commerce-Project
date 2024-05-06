@@ -8,53 +8,49 @@ import {
   LineChartOutlined,
   DatabaseOutlined
 }from '@ant-design/icons'
-
+import Discount from '../../components/Discount/Discount'
+import Product from '../../components/Product/Product'
+import Type from '../../components/Type/Type'
+import Order from '../../components/Order/Order'
+import Statistic from '../../components/Statistic/Statistic'
 const AdminPage = () => {
   const items = [
-    getItem('Khuyến mãi', 'discount', <AccountBookOutlined />, [
-      getItem('Option 1', '1'),
-      getItem('Option 2', '2'),
-      getItem('Option 3', '3'),
-      getItem('Option 4', '4'),
-    ]),
-    getItem('Sản Phẩm', 'product', <AppstoreOutlined />, [
-      getItem('Option 5', '5'),
-      getItem('Option 6', '6'),
-      getItem('Submenu', 'sub3', null, [getItem('Option 7', '7'), getItem('Option 8', '8') ]),
-    ]),
-    getItem('Loại Rèm', 'type', <ApartmentOutlined />, [
-      getItem('Option 9', '9'),
-      getItem('Option 10', '10'),
-      getItem('Option 11', '11'),
-      getItem('Option 12', '12'),
-    ]),
-    getItem('Đơn hàng', 'order', <DatabaseOutlined />, [
-      getItem('Option 13', '13'),
-      getItem('Option 14', '14'),
-      getItem('Option 15', '15'),
-      getItem('Option 16', '16'),
-    ]),
-    getItem('Thống Kê', 'statistic', <LineChartOutlined />, [
-      getItem('Option 17', '17'),
-      getItem('Option 18', '18'),
-      getItem('Option 19', '19'),
-      getItem('Option 20', '20'),
-    ])
+    getItem('Sản Phẩm', 'product', <AppstoreOutlined />),
+    getItem('Khuyến mãi', 'discount', <AccountBookOutlined />),
+    getItem('Loại Rèm', 'type', <ApartmentOutlined />),
+    getItem('Đơn hàng', 'order', <DatabaseOutlined />),
+    getItem('Thống Kê', 'statistic', <LineChartOutlined />)
   ]
 
-  const rootSubmenuKeys =['discount','user','type', 'order', 'statistic']
-  const [openKeys, setOpenKeys] = useState(['discount'])
-  const [keySelected ,setKeySelected] = useState('')
-
-  const onOpenChange = (keys) =>{
-    console.log('keys', keys)
-    const lastOpenKey = keys.find((key) => openKeys.indexOf(key) === -1)
-    if (rootSubmenuKeys.indexOf(lastOpenKey) === -1) {
-      setOpenKeys(keys)
-    } else {
-      setOpenKeys(lastOpenKey? [lastOpenKey] : [])
+  const renderPage = (key) => {
+    switch(key) {
+      case 'discount':
+        return (
+          <Discount/>
+        )
+      case 'product':
+        return (
+          <Product/>
+        )
+      case 'type':
+        return (
+          <Type/>
+        )
+      case 'order':
+        return (
+          <Order/>
+        )
+        case 'statistic':
+          return (
+            <Statistic/>
+          )
+        default:
+          return <></>
     }
   }
+
+  const [keySelected ,setKeySelected] = useState('')
+  console.log('keySelected', keySelected)
 
   const handleOnClick = ({key}) =>{
     setKeySelected(key)
@@ -64,17 +60,14 @@ const AdminPage = () => {
     <div style={{display: 'flex', height:'700px'}}>
       <Menu
         mode='inline'
-        openKeys={openKeys}
-        onOpenChange={onOpenChange}
         style={{
           width: 256,
         }}
         items={items}
         onClick={handleOnClick}
       />
-      <div>
-        { keySelected === '6' && <span>Key la 6</span> }
-        
+      <div style={{ flex : 1, padding: '15px' }}>    
+        {renderPage(keySelected)}
       </div>
     </div>
   )
