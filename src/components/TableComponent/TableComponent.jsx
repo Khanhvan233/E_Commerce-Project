@@ -1,6 +1,6 @@
 import { Checkbox, Divider, Radio, Table } from 'antd';
 import React, { useState } from 'react'
-
+import { Button, Modal } from 'antd';
 const TableComponent = (props) => {
 const {selectionType = 'checkbox'} = props
 
@@ -66,6 +66,7 @@ const data = [
         columns={columns}
         dataSource={data}
       />
+      
     </div>
   )
 }
