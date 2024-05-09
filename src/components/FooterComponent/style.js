@@ -11,7 +11,7 @@ export const WrapperFooter = styled(Row)`
     height: 300px;
 `
 export const WrapperTextFooter= styled.span`
-    font-size: 13px;
+    font-size: 17px;
     color: rgb( 172, 59, 97);
     font-weight: bold;
     text-align: left;
