@@ -15,7 +15,6 @@ const rowSelection = {
       name: record.name,
     }),
   }
-  console.log('data',data)
 
   return (
     <Loading isLoading={isLoading}>
@@ -26,6 +25,7 @@ const rowSelection = {
         }}
         columns={columns}
         dataSource={data}
+        {...props}
       />
     </Loading>
   )
