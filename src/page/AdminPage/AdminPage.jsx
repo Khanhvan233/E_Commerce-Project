@@ -13,6 +13,7 @@ import Product from '../../components/Product/Product'
 import Type from '../../components/Type/Type'
 import Order from '../../components/Order/Order'
 import Statistic from '../../components/Statistic/Statistic'
+import PromotionPage from '../PromotionPage/Promotion'
 const AdminPage = () => {
   const items = [
     getItem('Sản Phẩm', 'product', <AppstoreOutlined />),
@@ -26,7 +27,7 @@ const AdminPage = () => {
     switch(key) {
       case 'discount':
         return (
-          <Discount/>
+          <PromotionPage/>
         )
       case 'product':
         return (
@@ -57,7 +58,7 @@ const AdminPage = () => {
   }
 
   return (
-    <div style={{display: 'flex', height:'700px'}}>
+    <div style={{display: 'flex', height:'1000px'}}>
       <Menu
         mode='inline'
         style={{
