@@ -10,7 +10,6 @@ import {
 }from '@ant-design/icons'
 import Discount from '../../components/Discount/Discount'
 import Product from '../../components/Product/Product'
-import Type from '../../components/Type/Type'
 import Order from '../../components/Order/Order'
 import Statistic from '../../components/Statistic/Statistic'
 import PromotionPage from '../PromotionPage/Promotion'
@@ -18,7 +17,6 @@ const AdminPage = () => {
   const items = [
     getItem('Sản Phẩm', 'product', <AppstoreOutlined />),
     getItem('Khuyến mãi', 'discount', <AccountBookOutlined />),
-    getItem('Loại Rèm', 'type', <ApartmentOutlined />),
     getItem('Đơn hàng', 'order', <DatabaseOutlined />),
     getItem('Thống Kê', 'statistic', <LineChartOutlined />)
   ]
@@ -32,10 +30,6 @@ const AdminPage = () => {
       case 'product':
         return (
           <Product/>
-        )
-      case 'type':
-        return (
-          <Type/>
         )
       case 'order':
         return (

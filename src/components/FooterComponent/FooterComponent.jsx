@@ -11,7 +11,12 @@ import {
     GithubOutlined, 
 } from '@ant-design/icons';
 
+
 const FooterComponent = () => {
+    const navigate = useNavigate()
+    const handleNavigateMain = () => {
+    navigate('/')
+}
   return (
     <div style={{width: '100%', background:'rgb(153, 51,, 255)', display:'flex', justifyContent:'center' ,left:'0px', bottom: '0px'}}>
         <WrapperFooter>
@@ -22,7 +27,7 @@ const FooterComponent = () => {
                     </Row>
                     <Row>
                         <RightOutlined style={{fontSize: '13px', color:'rgb(128,0,128)', marginRight: '5px' }} />
-                        <WrapperText4>Trang chủ</WrapperText4>
+                        <WrapperText4  onClick={handleNavigateMain} style={{cursor: 'pointer'}}>Trang chủ</WrapperText4>
                     </Row>
                     <Row>
                         <RightOutlined style={{fontSize: '13px', color:'rgb(128,0,128)', marginRight: '5px' }} />
