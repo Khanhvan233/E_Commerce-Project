@@ -20,8 +20,8 @@ export const routes =[
     {
         path: '/order',
         page: OrderPage,
-        isShowHeader: true,
-        isShowFooter: true
+        isShowHeader: false,
+        isShowFooter: false
     },
     {
         path: '/products',
