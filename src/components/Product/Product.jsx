@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { WrapperHeader, WrapperUploadFile } from './style'
-import { Button , Modal,  Form } from 'antd'
-
+import { Button , Modal,  Form, Select } from 'antd'
 import{
   PlusOutlined,
+  EditOutlined,
+  DeleteOutlined,
+
 }from'@ant-design/icons'
 import TableComponent from '../TableComponent/TableComponent'
 import InputComponent from '../InputComponent/InputComponent'
@@ -11,6 +13,7 @@ import { getBase64 } from '../../utills'
 import * as ProductService from  '../../services/ProductService.js'
 import {useMutationHooks} from '../../hook/useMutationHooks.js'
 import Loading from '../../components/LoadingComponent/LoadingComponent.jsx'
+import { useQuery } from '@tanstack/react-query'
 
   
 const Product = () => {
@@ -23,10 +26,11 @@ const Product = () => {
     kichthuoc: "", 
     trangthai: "", 
     chatlieu: "", 
-    idloairem: "", 
+    idloairem: "",  
     gia: "",
     hinh_anh : "" 
   });
+  
   const handleOnChange =(e) => {
     setstateProduct({
       ...stateProduct,
@@ -35,6 +39,12 @@ const Product = () => {
     console.log('e.target.name: ', e.target.name, e.target.value );
   }
 
+  const handleOnSelect = (value) => {
+    setstateProduct({
+      ...stateProduct,
+      idloairem: value
+    });
+  };
 
   const mutation = useMutationHooks(
     (data) => {
@@ -62,12 +72,75 @@ const Product = () => {
     }
   )
 
+  const getAllProducts = async() => {
+    const res = await ProductService.getAllProduct()
+    return res
+  }
+  
   const {data, isLoading, isSuccess, isError} = mutation
+  const {isLoading : isLoadingProducts, data : products} = useQuery({queryKey: ['products'], queryFn: getAllProducts})
+  const renderAction =() =>{
+    return(
+      <div>
+        <DeleteOutlined style={{color:'red', fontSize: '30px', cursor:'pointer'}}/>
+        <EditOutlined style={{color:'yellow', fontSize: '30px', cursor:'pointer'}}/>
+      </div>
+    )
+  }
+  const columns = [
+    {
+        title: 'Tên',
+        dataIndex: 'ten_rem',
+        render: (text) => <a>{text}</a>,
+    },
+    {
+        title: 'Đơn vị',
+        dataIndex: 'don_vi',
+    },
+    {
+        title: 'Bảo hành',
+        dataIndex: 'bao_hanh',
+    },
+    {
+      title: 'Xuất xứ',
+      dataIndex: 'xuat_xu',
+    },
+    {
+      title: 'Kích thước',
+      dataIndex: 'kich_thuoc',
+    },
+    {
+      title: 'Trạng thái',
+      dataIndex: 'thang_thai',
+    },
+    {
+      title: 'Chât liệu',
+      dataIndex: 'chat_lieu',
+    },
+    {
+      title: 'Loại rèm',
+      dataIndex: 'id_loai_rem',
+    },
+    {
+      title: 'Giá',
+      dataIndex: 'gia_goc',
+    },
+    {
+      title: 'Tùy chọn',
+      dataIndex: 'tuychon',
+      render: renderAction  
+    },
+    
+    ]
+    const dataTable = products?.length && products?.map((product) => {
+      return {...product, key: product._id}
+    })
 
   const onFinish = () => {
     mutation.mutate(stateProduct)
     console.log('finished', stateProduct)
   }
+  
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -100,15 +173,14 @@ const Product = () => {
           <PlusOutlined style={{fontSize: '60px'}}/>
         </Button>
       </div>
-      <TableComponent/>
-      <Modal title="Tạo sản phẩm" open={isModalOpen} onOk={handleOk}  onCancel={handleCancel}>
+      <TableComponent columns={columns} isLoading={isLoadingProducts} data ={dataTable}/>
+      <Modal title="Tạo sản phẩm" open={isModalOpen} onOk={handleOk}  onCancel={handleCancel} footer= {null}>
         <Loading isLoading={isLoading}>
           <Form
           name="basic"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
+          labelCol={{ span: 6 }}
+          wrapperCol={{ span: 18 }}
           style={{ maxWidth: 600 }}
-          initialValues={{ remember: true }}
           onFinish={onFinish}
          
           autoComplete="off"
@@ -116,7 +188,7 @@ const Product = () => {
           <Form.Item
             label="Tên Rèm Cửa"
             name="tenremcua"
-            rules={[{ required: true, message: 'Không Được Bỏ Trống' }]}
+            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
             <InputComponent value={stateProduct.tenremcua} onChange={handleOnChange} name='tenremcua' />
           </Form.Item>
@@ -124,7 +196,7 @@ const Product = () => {
           <Form.Item
             label="Đơn Vị"
             name="donvi"
-            rules={[{ required: true, message: 'Please input your type!' }]}
+            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
             <InputComponent value={stateProduct.donvi} onChange={handleOnChange} name='donvi' />
           </Form.Item >
@@ -132,7 +204,7 @@ const Product = () => {
           <Form.Item
             label="Bảo Hành"
             name="baohanh"
-            rules={[{ required: true, message: 'Please input your count in stock!' }]}
+            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
             <InputComponent value={stateProduct.baohanh} onChange={handleOnChange} name='baohanh' />
           </Form.Item>
@@ -140,7 +212,7 @@ const Product = () => {
           <Form.Item
             label="Xuất Xứ"
             name="xuatxu"
-            rules={[{ required: true, message: 'Please input your price!' }]}
+            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
             <InputComponent value={stateProduct.xuatxu} onChange={handleOnChange} name='xuatxu' />
           </Form.Item>
@@ -148,7 +220,7 @@ const Product = () => {
           <Form.Item
             label="Kích Thước"
             name="kichthuoc"
-            rules={[{ required: true, message: 'Please input your rating!' }]}
+            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
             <InputComponent value={stateProduct.kichthuoc} onChange={handleOnChange} name='kichthuoc' />
           </Form.Item>
@@ -156,7 +228,7 @@ const Product = () => {
           <Form.Item
             label="Trạng Thái"
             name="trangthai"
-            rules={[{ required: true, message: 'Please input your rating!' }]}
+            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
             <InputComponent value={stateProduct.trangthai} onChange={handleOnChange} name='trangthai' />
           </Form.Item>
@@ -164,7 +236,7 @@ const Product = () => {
           <Form.Item
             label="Chất Liệu"
             name="chatlieu"
-            rules={[{ required: true, message: 'Please input your rating!' }]}
+            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
             <InputComponent value={stateProduct.chatlieu} onChange={handleOnChange} name='chatlieu' />
           </Form.Item>
@@ -172,7 +244,7 @@ const Product = () => {
           <Form.Item
             label="Giá cả "
             name="gia"
-            rules={[{ required: true, message: 'Please input your rating!' }]}
+            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
             <InputComponent value={stateProduct.gia} onChange={handleOnChange} name='gia' />
           </Form.Item>
@@ -180,15 +252,59 @@ const Product = () => {
           <Form.Item
             label="Id Loại Rèm"
             name="idloairem"
-            rules={[{ required: true, message: 'Please input your rating!' }]}
+            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
-            <InputComponent value={stateProduct.idloairem} onChange={handleOnChange} name='idloairem' />
+            <Select value={stateProduct.idloairem} onChange={handleOnSelect}
+              options={[
+                {
+                  value: '1',
+                  label: 'Rèm cửa',
+                },
+                {
+                  value: '2',
+                  label: 'Rèm vải',
+                },
+                {
+                  value: '3',
+                  label: 'Rèm cuốn',
+                },
+                {
+                  value: '4',
+                  label: 'Rèm Roman',
+                },
+                {
+                  value: '5',
+                  label: 'Rèm văn phòng',
+                },
+                {
+                  value: '6',
+                  label: 'Rèm sáo gỗ',
+                },
+                {
+                  value: '7',
+                  label: 'Rèm sáo nhôm',
+                },
+                {
+                  value: '8',
+                  label: 'Rèm cầu vồng',
+                },
+                {
+                  value: '9',
+                  label: 'Rèm sợi chỉ',
+                },
+                {
+                  value: '10',
+                  label: 'Rèm phòng tắm',
+                },
+
+              ]}
+              />
           </Form.Item>
 
           <Form.Item
             label="Hình Ảnh"
             name="hinh_anh"
-            rules={[{ required: true, message: 'Please input your image!' }]}
+            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
             <WrapperUploadFile onChange={handleOnChangeAvatar} maxCount={1}>
               <Button>
@@ -209,7 +325,7 @@ const Product = () => {
 
          
 
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
