@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { WrapperHeader, WrapperUploadFile } from './style'
-import { Button , Modal,  Form, Select } from 'antd'
+import { Button , Modal,  Form, Select, message } from 'antd'
 import{
   PlusOutlined,
   EditOutlined,
@@ -14,13 +14,14 @@ import {useMutationHooks} from '../../hook/useMutationHooks.js'
 import Loading from '../../components/LoadingComponent/LoadingComponent.jsx'
 import { useQuery } from '@tanstack/react-query'
 import DrawerComponent from '../DrawerComponent/DrawerComponent.jsx'
+import ModalComponent from '../ModalComponent/ModalComponent.jsx'
 
   
 const Product = () => {
   const [isOpenDrawer, setIsOpenDrawer]=useState(false)
   const [rowSelected, setRowSelected] =useState('')
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+  const [isModalOpenDelete, setIsModalOpenDelete] = useState(false)
   const [form] = Form.useForm();
 
   const [stateProduct, setstateProduct] = useState({
@@ -104,6 +105,16 @@ const Product = () => {
     }
   )
 
+  const mutationDeleted = useMutationHooks(
+    (data) => {
+      const { id
+      } = data
+      const res = ProductService.deleteProduct(
+        id)
+      return res
+    },
+  )
+
   const getAllProducts = async() => {
     const res = await ProductService.getAllProduct()
     return res
@@ -129,6 +140,10 @@ const Product = () => {
     console.log('StateProductDetails',stateProductDetails)
   }
 
+  const handleDeleteProduct =() =>{
+    mutationDeleted.mutate({id: rowSelected})
+  }
+
   const handleDetailsProduct= () => {
     if(rowSelected){
       fetchGetDetailProduct()
@@ -147,12 +162,23 @@ const Product = () => {
     }
   }, [rowSelected] )
 
+  // useEffect(() => {
+  //   if (isSuccessDeleted && dataDeleted?.status === '200') {
+  //     message.success()
+  //     handleCancelDelete()
+  //   } else if (isErrorDeleted) {
+  //     message.error()
+  //   }
+  // }, [isSuccessDeleted])
+
   const {data, isLoading, isSuccess, isError} = mutation
+  const { data: dataDeleted, isLoading: isLoadingDeleted, isSuccess: isSuccessDeleted, isError: isErrorDeleted } = mutationDeleted
+
   const {isLoading : isLoadingProducts, data : products} = useQuery({queryKey: ['products'], queryFn: getAllProducts})
   const renderAction =() =>{
     return(
       <div>
-        <DeleteOutlined style={{color:'red', fontSize: '30px', cursor:'pointer',marginRight:'10px'}}/>
+        <DeleteOutlined style={{color:'red', fontSize: '30px', cursor:'pointer',marginRight:'10px'}} onClick={() => setIsModalOpenDelete(true)}/>
         <EditOutlined style={{color:'yellow', fontSize: '30px', cursor:'pointer'}} onClick={handleDetailsProduct}/>
       </div>
     )
@@ -219,6 +245,10 @@ const Product = () => {
     onFinish();
   };
 
+  const handleCancelDelete= () =>{
+    setIsModalOpenDelete(false)
+  }
+
   const handleCancel = () => {
     setIsModalOpen(false)
     setstateProduct({
@@ -272,7 +302,7 @@ const Product = () => {
             }
           };
         }} />
-      <Modal title="Tạo sản phẩm" open={isModalOpen} onOk={handleOk}  onCancel={handleCancel} footer= {null}>
+      <ModalComponent title="Tạo sản phẩm" open={isModalOpen} onOk={handleOk}  onCancel={handleCancel} footer= {null}>
         <Loading isLoading={isLoading}>
           <Form
           name="basic"
@@ -430,7 +460,7 @@ const Product = () => {
           </Form.Item>
           </Form>
         </Loading>
-      </Modal>
+      </ModalComponent>
       <DrawerComponent title='Chi tiết sản phẩm' isOpen={isOpenDrawer} onClose={() => setIsOpenDrawer(false)} width="40%">
       <Loading isLoading={isLoading}>
           <Form
@@ -590,6 +620,13 @@ const Product = () => {
           </Form>
       </Loading> 
       </DrawerComponent>
+
+      <ModalComponent title="Xóa sản phẩm" open={isModalOpenDelete} onCancel={handleCancelDelete} onOk={handleDeleteProduct}>
+        <Loading isLoading={isLoadingDeleted}>
+          <div>Bạn có chắc xóa sản phẩm này không?</div>
+        </Loading>
+      </ModalComponent>
+
     </div>
   )
 }
