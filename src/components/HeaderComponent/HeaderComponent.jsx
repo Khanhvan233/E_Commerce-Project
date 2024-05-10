@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Badge, Col} from 'antd';
 import { WrapperHeader, WrapperHeaderAccount, WrapperTextHeader, WrapperTextHeaderSmall } from './style';
 import ButtonInputSearch from '../ButtonInputSearch/ButtonInputSearch';
@@ -7,16 +7,29 @@ import {
   PhoneOutlined,
   ShoppingCartOutlined,
 } from '@ant-design/icons';
+import { updateUser } from '../../redux/slides/userSlide';
+import { useDispatch } from 'react-redux';
+import { searchProduct } from '../../redux/slides/productSlide';
+
 
 
 const HeaderComponent = () => {
   const navigate = useNavigate()
+  const dispatch =useDispatch()
+  const [search, setSearch] =useState('')
+  const [loading, setLoading] =useState('')
+
   const handleNavigateLogin = () => {
     navigate('/admin')
   }
   const handleNavigateMain = () => {
     navigate('/')
   }
+
+  const onSearch =(e) =>{
+    console.log('e',e.target.value)
+  }
+
   return (
     <div style={{width: '100%', background:'rgb(153, 51,, 255)', display:'flex', justifyContent:'center'}}>
       <WrapperHeader>
@@ -31,6 +44,7 @@ const HeaderComponent = () => {
             bordered="false"
             textButton="Tìm kiếm"
             placeholder="input search text"
+            onChange={onSearch}
          />
         </Col>
         <Col span={6} style={{display: 'flex', gap:'54px', alignItems:'center'}}>

@@ -112,6 +112,7 @@ const Product = () => {
   const {data, isLoading, isSuccess, isError} = mutation
   const { data: dataDeleted, isLoading: isLoadingDeleted, isSuccess: isSuccessDeleted, isError: isErrorDeleted } = mutationDeleted
 
+
   const {isLoading : isLoadingProducts, data : products} = useQuery({queryKey: ['products'], queryFn: getAllProducts})
   const renderAction =() =>{
     return(
