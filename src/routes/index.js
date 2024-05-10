@@ -59,10 +59,4 @@ export const routes =[
         isShowHeader: false,
         isShowFooter: true
     },
-    {
-        path: '/promotion',
-        page: PromotionPage,
-        isShowHeader: false,
-        isShowFooter: false
-    },
 ]

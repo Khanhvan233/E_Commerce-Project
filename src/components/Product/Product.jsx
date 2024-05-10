@@ -36,19 +36,6 @@ const Product = () => {
     gia: "",
     hinh_anh : "" 
   });
-  const [stateProductDetails, setstateProductDetails] = useState({
-    tenremcua: "", 
-    donvi: "", 
-    baohanh: "", 
-    xuatxu: "", 
-    kichthuoc: "", 
-    trangthai: "", 
-    chatlieu: "", 
-    idloairem: "",  
-    gia: "",
-    hinh_anh : "" 
-  });
-  
   
   const handleOnChange =(e) => {
     setstateProduct({
@@ -57,23 +44,10 @@ const Product = () => {
     })
     console.log('e.target.name: ', e.target.name, e.target.value );
   }
-  const handleOnChangeDetails =(e) => {
-    setstateProductDetails({
-      ...stateProductDetails,
-      [e.target.name] : e.target.value
-    })
-    console.log('e.target.name: ', e.target.name, e.target.value );
-  }
 
   const handleOnSelect = (value) => {
     setstateProduct({
       ...stateProduct,
-      idloairem: value
-    });
-  };
-  const handleOnSelectDetails = (value) => {
-    setstateProductDetails({
-      ...stateProductDetails,
       idloairem: value
     });
   };
@@ -119,48 +93,12 @@ const Product = () => {
     const res = await ProductService.getAllProduct()
     return res
   }
-  
-  const fetchGetDetailProduct = async (rowSelected) => {
-    const res = await ProductService.getDetailsProduct(rowSelected)
-    if(res)
-      {
-        setstateProductDetails({
-          ten_rem: res?.ten_rem, 
-          don_vi: res?.don_vi, 
-          bao_hanh: res?.bao_hanh, 
-          xuat_xu: res?.xuat_xu, 
-          kich_thuoc: res?.kich_thuoc, 
-          trang_thai: res?.trang_thai, 
-          chat_lieu: res?.chat_lieu, 
-          id_loai_rem: res?.id_loai_rem, 
-          gia_goc: res?.gia_goc, 
-          hinh_anh : res?.hinh_anh, 
-        })
-      }
-    console.log('StateProductDetails',stateProductDetails)
-  }
+
 
   const handleDeleteProduct =() =>{
     mutationDeleted.mutate({id: rowSelected})
   }
 
-  const handleDetailsProduct= () => {
-    if(rowSelected){
-      fetchGetDetailProduct()
-    }
-    setIsOpenDrawer(true)
-    console.log('rowSelected',rowSelected)
-  }
-
-  useEffect(() => {
-    form.setFieldValue(stateProductDetails)
-  }, [form, stateProductDetails])
-
-  useEffect(() =>{
-    if(rowSelected){
-      fetchGetDetailProduct(rowSelected)
-    }
-  }, [rowSelected] )
 
   // useEffect(() => {
   //   if (isSuccessDeleted && dataDeleted?.status === '200') {
@@ -179,7 +117,7 @@ const Product = () => {
     return(
       <div>
         <DeleteOutlined style={{color:'red', fontSize: '30px', cursor:'pointer',marginRight:'10px'}} onClick={() => setIsModalOpenDelete(true)}/>
-        <EditOutlined style={{color:'yellow', fontSize: '30px', cursor:'pointer'}} onClick={handleDetailsProduct}/>
+        <EditOutlined style={{color:'yellow', fontSize: '30px', cursor:'pointer'}}/>
       </div>
     )
   }
@@ -275,17 +213,6 @@ const Product = () => {
       hinh_anh : file.preview
     })
   }
-  const handleOnchangeAvatarDetails = async ({ fileList }) => {
-    const file = fileList[0]
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
-    }
-    setstateProductDetails({
-      ...stateProductDetails,
-      image: file.preview
-    })
-  }
-
 
   return (
     <div>
@@ -461,166 +388,6 @@ const Product = () => {
           </Form>
         </Loading>
       </ModalComponent>
-      <DrawerComponent title='Chi tiết sản phẩm' isOpen={isOpenDrawer} onClose={() => setIsOpenDrawer(false)} width="40%">
-      <Loading isLoading={isLoading}>
-          <Form
-          name="basic"
-          labelCol={{ span: 6 }}
-          wrapperCol={{ span: 18 }}
-          style={{ maxWidth: 600 }}
-          onFinish={onFinish}
-          autoComplete="off"
-          form={form}
-        >
-          <Form.Item
-            label="Tên Rèm Cửa"
-            name="tenremcua"
-            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
-          >
-            <InputComponent value={stateProductDetails.tenremcua} onChange={handleOnChangeDetails} name='tenremcua' />
-          </Form.Item>
-
-          <Form.Item
-            label="Đơn Vị"
-            name="donvi"
-            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
-          >
-            <InputComponent value={stateProductDetails.donvi} onChange={handleOnChangeDetails} name='donvi' />
-          </Form.Item >
-
-          <Form.Item
-            label="Bảo Hành"
-            name="baohanh"
-            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
-          >
-            <InputComponent value={stateProductDetails.baohanh} onChange={handleOnChangeDetails} name='baohanh' />
-          </Form.Item>
-
-          <Form.Item
-            label="Xuất Xứ"
-            name="xuatxu"
-            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
-          >
-            <InputComponent value={stateProductDetails.xuatxu} onChange={handleOnChangeDetails} name='xuatxu' />
-          </Form.Item>
-
-          <Form.Item
-            label="Kích Thước"
-            name="kichthuoc"
-            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
-          >
-            <InputComponent value={stateProductDetails.kichthuoc} onChange={handleOnChangeDetails} name='kichthuoc' />
-          </Form.Item>
-
-          <Form.Item
-            label="Trạng Thái"
-            name="trangthai"
-            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
-          >
-            <InputComponent value={stateProductDetails.trangthai} onChange={handleOnChangeDetails} name='trangthai' />
-          </Form.Item>
-
-          <Form.Item
-            label="Chất Liệu"
-            name="chatlieu"
-            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
-          >
-            <InputComponent value={stateProductDetails.chatlieu} onChange={handleOnChangeDetails} name='chatlieu' />
-          </Form.Item>
-
-          <Form.Item
-            label="Giá cả "
-            name="gia"
-            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
-          >
-            <InputComponent value={stateProductDetails.gia} onChange={handleOnChangeDetails} name='gia' />
-          </Form.Item>
-
-          <Form.Item
-            label="Id Loại Rèm"
-            name="idloairem"
-            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
-          >
-            <Select value={stateProductDetails.idloairem} onChange={handleOnSelectDetails}
-              options={[
-                {
-                  value: '1',
-                  label: 'Rèm cửa',
-                },
-                {
-                  value: '2',
-                  label: 'Rèm vải',
-                },
-                {
-                  value: '3',
-                  label: 'Rèm cuốn',
-                },
-                {
-                  value: '4',
-                  label: 'Rèm Roman',
-                },
-                {
-                  value: '5',
-                  label: 'Rèm văn phòng',
-                },
-                {
-                  value: '6',
-                  label: 'Rèm sáo gỗ',
-                },
-                {
-                  value: '7',
-                  label: 'Rèm sáo nhôm',
-                },
-                {
-                  value: '8',
-                  label: 'Rèm cầu vồng',
-                },
-                {
-                  value: '9',
-                  label: 'Rèm sợi chỉ',
-                },
-                {
-                  value: '10',
-                  label: 'Rèm phòng tắm',
-                },
-
-              ]}
-              />
-          </Form.Item>
-
-          <Form.Item
-            label="Hình Ảnh"
-            name="hinh_anh"
-            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
-          >
-            <WrapperUploadFile onChange={handleOnchangeAvatarDetails} maxCount={1}>
-              <Button>
-                Select File
-              </Button>
-              {stateProductDetails?.hinh_anh && (
-                <img src= {stateProductDetails?.hinh_anh} style={{
-                  height: '60px',
-                  width: '60px%',
-                  borderRadius: '50%',
-                  objectFit: 'cover',
-                  marginLeft: '10px',
-                }} alt= "avatar" />
-              )}
-            </WrapperUploadFile>
-            
-          </Form.Item>
-
-         
-
-          <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-          </Form>
-      </Loading> 
-      </DrawerComponent>
-
       <ModalComponent title="Xóa sản phẩm" open={isModalOpenDelete} onCancel={handleCancelDelete} onOk={handleDeleteProduct}>
         <Loading isLoading={isLoadingDeleted}>
           <div>Bạn có chắc xóa sản phẩm này không?</div>

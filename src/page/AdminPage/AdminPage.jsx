@@ -8,11 +8,10 @@ import {
   LineChartOutlined,
   DatabaseOutlined
 }from '@ant-design/icons'
-import Discount from '../../components/Discount/Discount'
 import Product from '../../components/Product/Product'
-import Order from '../../components/Order/Order'
 import Statistic from '../../components/Statistic/Statistic'
 import PromotionPage from '../PromotionPage/Promotion'
+import OrderPage from '../OrderPage/OrderPage'
 const AdminPage = () => {
   const items = [
     getItem('Sản Phẩm', 'product', <AppstoreOutlined />),
@@ -33,7 +32,7 @@ const AdminPage = () => {
         )
       case 'order':
         return (
-          <Order/>
+          <OrderPage/>
         )
         case 'statistic':
           return (
