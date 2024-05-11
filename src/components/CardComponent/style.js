@@ -16,7 +16,7 @@ export const WrapperCardStyle = styled(Card)`
 
 export const StyleNameProduct = styled.div`
 font-weight: 400;
-font-size: 12px;
+font-size: 17px;
 line-height: 16px;
 color: rgb(56, 56, 61);
 `
@@ -34,7 +34,7 @@ color: rgb(255, 66, 78);
 margin: 8px 0;
 `
 
-export const WrapperDiscountText = styled.span`
+export const WrapperLocationText = styled.span`
 font-size: 12px;
 font-weight: 500;
 color: rgb(255, 66, 78);

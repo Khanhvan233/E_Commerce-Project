@@ -4,16 +4,21 @@ import React from 'react'
 import logo from '../../assets/images/logo.png'
 import { StyleNameProduct, WrapperCardStyle, WrapperDiscountText, WrapperPriceText, WrapperReportText } from './style'
 import {StarFilled} from '@ant-design/icons'
+import { useNavigate } from 'react-router-dom'
 const CardComponent = (props) => {
   const {ten_rem, hinh_anh, xuat_xu, bao_hanh, gia_goc, chat_lieu, don_vi, trang_thai, kich_thuoc, id} =props
+  const navigate =useNavigate()
+  const handleDetailsProduct=(id) =>{
+    navigate(`/product-details/${id}`)
+  }
   return (
     <WrapperCardStyle
             hoverable
             headStyle={{ width: '200px', height: '200px' }}
             style={{ width: 200 }}
-            bodyStyle={{ padding: '10px' }}
+            bodyStyle={{ padding: '8px' }}
             cover={<img alt="example" src={hinh_anh} />}
-
+            onClick={() => handleDetailsProduct(id)}
         >
             <img
                 src={logo}
@@ -31,16 +36,16 @@ const CardComponent = (props) => {
     <StyleNameProduct>{ten_rem}</StyleNameProduct>
       <WrapperReportText>
         <span style={{marginRight: '4px'}}>
-          <span>{chat_lieu}</span><StarFilled style={{fontSize: '10px', color:'yellow'}}/>
+          <span>{chat_lieu}</span>
         </span>
         <span>| Còn lại {trang_thai}</span> 
       </WrapperReportText>
        <WrapperPriceText>
-        <span style={{marginRight: '8px'}}>{gia_goc}</span>
-        <WrapperDiscountText>
-             -5%
-        </WrapperDiscountText>
+        <span style={{marginRight: '8px'}}>{gia_goc.toLocaleString()}</span>
+        <span>&#8363;</span>
+        
       </WrapperPriceText> 
+      <span style={{fontSize:'11px'}}>  Made in {xuat_xu}</span>
     </WrapperCardStyle>
   )
 }

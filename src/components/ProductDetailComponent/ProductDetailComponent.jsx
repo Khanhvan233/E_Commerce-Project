@@ -1,35 +1,32 @@
 import React from 'react'
 import { Image, Row, Col} from 'antd';
 import ImageProduct from '../../assets/images/remcua1.jpg'
-import ImageProductSmall from '../../assets/images/SmallProduct.jpg'
+import * as ProductService from  '../../services/ProductService.js'
 import {StarFilled,PlusOutlined,MinusOutlined, DownloadOutlined} from '@ant-design/icons'
 import { InputNumber, Button } from 'antd';
 
 import { WrapperStyleImageSmall, WrapperStyleColImage, WrapperStyleNameProduct, WrapperStyleTextSell, WrapperPriceProduct, WrapperPriceTextProduct, WrapperAddressProduct, WrapperQualityProduct,WrapperButton, WrapperInputNumber } from './style'
-const ProductDetailComponent = () => {
+import { useQuery } from '@tanstack/react-query';
+const ProductDetailComponent = (id) => {
+
   const onChange = () => {}
+  const dataID = JSON.stringify(id)
+  const fetchGetDetailsProduct = async() => {
+    const res = await ProductService.getDetailsProduct(dataID)
+    return res
+  }
+  const {data: productDetails} = useQuery({queryKey: ['product-details'], queryFn: fetchGetDetailsProduct})
+  console.log(productDetails)
   return (
       <Row style={{padding: '16px'}}>
         <Col span={10}>
           <Image src={ImageProduct} alt='image product' preview={false} />
           <div>
-            <Row style={{paddingTop: '5px',justifyContent: 'space-between'}}>
-              <WrapperStyleColImage span={6} sty>
-                <WrapperStyleImageSmall src={ImageProductSmall} alt='image product small' preview={false}></WrapperStyleImageSmall>
-              </WrapperStyleColImage>
-              <WrapperStyleColImage span={6}>
-                <WrapperStyleImageSmall src={ImageProductSmall} alt='image product small' preview={false}></WrapperStyleImageSmall>
-              </WrapperStyleColImage>
-              <WrapperStyleColImage span={6}>
-                <WrapperStyleImageSmall src={ImageProductSmall} alt='image product small' preview={false}></WrapperStyleImageSmall>
-              </WrapperStyleColImage>
-              <WrapperStyleColImage span={6}>
-                <WrapperStyleImageSmall src={ImageProductSmall} alt='image product small' preview={false}></WrapperStyleImageSmall>
-              </WrapperStyleColImage> 
+            <Row style={{paddingTop: '10px',justifyContent: 'space-between'}}>
             </Row>
           </div>
         </Col>
-        <Col style={{paddingLeft: '10px '}} span={14}>
+        <Col style={{paddingLeft: '40px '}} span={14}>
           <WrapperStyleNameProduct>Rèm cửa tiện dùng cho nhà</WrapperStyleNameProduct>
           <div>
             <StarFilled style={{fontSize: '10px', color:'rgb(253,216,54)'}}/>

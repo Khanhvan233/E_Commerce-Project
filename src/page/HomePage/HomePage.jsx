@@ -50,24 +50,13 @@ const HomePage = () => {
                   chat_lieu={product.chat_lieu}
                   don_vi={product.don_vi}
                   kich_thuoc={product.kich_thuoc}
-                  id={product._id}
+                  id={product.id}
                 />
               )
             })}
           </WrapperProducts>
             <div style={{width: '100%', display: 'flex', justifyContent:'center', marginTop: '10px'}}>
-              <WrapperButtonMore textButton="Xem thêm" type="outline"
-                styleButton={{
-                  border: '1px solid rgb(11, 116, 229)', 
-                  color: 'rgb(11, 116, 229)',
-                  width: '240px',
-                  height: '38px',
-                  borderRadius: '4px',
-                  marginTop: '10px',
-                  marginBottom: '10px'
-                }}
-                styleTextButton={{fontWeight: 500}}
-              />
+              <div style={{height:'50'}}></div>
             </div>
           </div>
           </div>

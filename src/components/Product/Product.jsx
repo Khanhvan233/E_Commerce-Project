@@ -106,7 +106,14 @@ const Product = () => {
         idloairem, 
         gia,
         hinh_anh  
-      })
+      }).then(res => {
+        alert(" Thành công")
+        setIsModalOpenUpdate(false)
+      }).catch(error => {
+        alert(" Thất Bại")
+        setIsModalOpenUpdate(false)
+      });
+      
     }
   )
   const mutationUpdate = useMutationHooks(
@@ -135,12 +142,10 @@ const Product = () => {
         hinh_anh  
       }).then(res => {
         alert(" Thành công")
-        setIsModalOpenUpdate(false)
       }).catch(error => {
         alert(" Thất Bại")
-        setIsModalOpenUpdate(false)
-      });
-  
+        
+      })
     }
   )
 
