@@ -6,25 +6,13 @@ import { StyleNameProduct, WrapperCardStyle, WrapperDiscountText, WrapperPriceTe
 import {StarFilled} from '@ant-design/icons'
 const CardComponent = (props) => {
   const {ten_rem, hinh_anh, xuat_xu, bao_hanh, gia_goc, chat_lieu, don_vi, trang_thai, kich_thuoc, id} =props
-  const decodeBase64ToImage = (base64Data) => {
-    const binaryString = atob(base64Data);
-    const bytes = new Uint8Array(binaryString.length);
-    for (let i = 0; i < binaryString.length; i++) {
-      bytes[i] = binaryString.charCodeAt(i);
-    }
-    const blob = new Blob([bytes], { type: 'image/png' });
-    const imageUrl = URL.createObjectURL(blob);
-    return imageUrl;
-  };
-
-  const imageUrl = decodeBase64ToImage(hinh_anh);
   return (
     <WrapperCardStyle
             hoverable
             headStyle={{ width: '200px', height: '200px' }}
             style={{ width: 200 }}
             bodyStyle={{ padding: '10px' }}
-            cover={<img alt="example" src={imageUrl} />}
+            cover={<img alt="example" src={hinh_anh} />}
 
         >
             <img

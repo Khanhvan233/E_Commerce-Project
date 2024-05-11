@@ -12,7 +12,7 @@ export const getDetailsProduct = async (id) => {
     const res = await axios.get(`${process.env.REACT_APP_API_URL}/product_get/${id}`)
     return res.data
 }
-export const deleteProduct = async (id) => {
-    const res = await axios.delete(`${process.env.REACT_APP_API_URL}/product_del/${id}`)
+export const deleteProduct = async (data) => {
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/product_del`, data)
     return res.data
 }
