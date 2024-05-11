@@ -16,3 +16,7 @@ export const deleteProduct = async (data) => {
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/product_del`, data)
     return res.data
 }
+export const updateProduct = async (data) => {
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/product_update`, data)
+    return res.data
+}

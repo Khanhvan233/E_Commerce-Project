@@ -20,13 +20,27 @@ import InputComponentPro from '../InputComponent/InputComponentPro.jsx'
 
   
 const Product = () => {
-  const [isOpenDrawer, setIsOpenDrawer]=useState(false)
+  const [content, setContent]=useState('')
   const [rowSelected, setRowSelected] =useState('')
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpenDelete, setIsModalOpenDelete] = useState(false)
+  const [isModalOpenUpdate, setIsModalOpenUpdate] = useState(false)
   const [form] = Form.useForm();
 
   const [stateProduct, setstateProduct] = useState({
+    tenremcua: "", 
+    donvi: "", 
+    baohanh: "", 
+    xuatxu: "", 
+    kichthuoc: "", 
+    trangthai: "", 
+    chatlieu: "", 
+    idloairem: "",  
+    gia: "",
+    hinh_anh : "" 
+  });
+  const [stateProductUpdate, setstateProductUpdate] = useState({
+    id: "", 
     tenremcua: "", 
     donvi: "", 
     baohanh: "", 
@@ -47,9 +61,24 @@ const Product = () => {
     console.log('e.target.name: ', e.target.name, e.target.value );
   }
 
+  const handleOnChangeUpdate =(e) => {
+    setstateProductUpdate({
+      ...stateProductUpdate,
+      [e.target.name] : e.target.value
+    })
+    console.log('e.target.name: ', e.target.name, e.target.value );
+  }
+
   const handleOnSelect = (value) => {
     setstateProduct({
       ...stateProduct,
+      idloairem: value
+    });
+  };
+
+  const handleOnSelectUpdate = (value) => {
+    setstateProductUpdate({
+      ...stateProductUpdate,
       idloairem: value
     });
   };
@@ -80,16 +109,34 @@ const Product = () => {
       })
     }
   )
-
-  const mutationDeleted = useMutationHooks(
+  const mutationUpdate = useMutationHooks(
     (data) => {
-      const { id
-      } = data
-      const res = ProductService.deleteProduct(
-        id)
-      return res
-    },
+      const { id,
+      tenremcua, 
+      donvi, 
+      baohanh, 
+      xuatxu, 
+      kichthuoc, 
+      trangthai, 
+      chatlieu, 
+      idloairem, 
+      gia,
+      hinh_anh} = data
+      ProductService.updateProduct({ id,
+        tenremcua, 
+        donvi, 
+        baohanh, 
+        xuatxu, 
+        kichthuoc, 
+        trangthai, 
+        chatlieu, 
+        idloairem, 
+        gia,
+        hinh_anh  
+      })
+    }
   )
+
 
   const getAllProducts = async() => {
     const res = await ProductService.getAllProduct()
@@ -104,33 +151,23 @@ const Product = () => {
     console.log(data);
 
     ProductService.deleteProduct(data).then(res => {
-      alert(" Thành công");
+      alert(" Thành công")
+      setIsModalOpenDelete(false)
     }).catch(error => {
       alert(" Thất Bại")
+      setIsModalOpenDelete(false)
     });
 
   }
 
-
-  // useEffect(() => {
-  //   if (isSuccessDeleted && dataDeleted?.status === '200') {
-  //     message.success()
-  //     handleCancelDelete()
-  //   } else if (isErrorDeleted) {
-  //     message.error()
-  //   }
-  // }, [isSuccessDeleted])
-
   const {data, isLoading, isSuccess, isError} = mutation
-  const { data: dataDeleted, isLoading: isLoadingDeleted, isSuccess: isSuccessDeleted, isError: isErrorDeleted } = mutationDeleted
-
 
   const {isLoading : isLoadingProducts, data : products} = useQuery({queryKey: ['products'], queryFn: getAllProducts})
   const renderAction =() =>{
     return(
       <div>
         <DeleteOutlined style={{color:'red', fontSize: '30px', cursor:'pointer',marginRight:'10px'}} onClick={() => setIsModalOpenDelete(true)}/>
-        <EditOutlined style={{color:'yellow', fontSize: '30px', cursor:'pointer'}} onClick={handUpdateProduct}/>
+        <EditOutlined style={{color:'yellow', fontSize: '30px', cursor:'pointer'}} onClick={() => setIsModalOpenUpdate(true)}/>
       </div>
     )
   }
@@ -187,29 +224,31 @@ const Product = () => {
     mutation.mutate(stateProduct)
     console.log('finished', stateProduct)
   }
+  const onFinishUpdate = () => {
+    mutationUpdate.mutate(stateProductUpdate)
+    console.log('finishedUpdate', stateProductUpdate)
+  }
+  
   
   const showModal = () => {
     setIsModalOpen(true);
   };
 
   const handleOk = () => {
-    onFinish();
-  };
+    onFinish()
+  }
+
+  const handleOkUpdate = () => {
+    onFinishUpdate()
+  }
+
 
   const handleCancelDelete= () =>{
     setIsModalOpenDelete(false)
+  } 
+  const handleCancelUpdate= () =>{
+    setIsModalOpenUpdate(false)
   }
-
-  const handUpdateProduct = () => {
-    setIsOpenDrawer(true)
-  };
-
-  const summitUpdate = () => {
-    
-  };
-
-
-
 
 
   const handleCancel = () => {
@@ -238,11 +277,20 @@ const Product = () => {
       hinh_anh : file.preview
     })
   }
+  const handleOnChangeAvatarUpdate = async ({fileList}) => {
+    const file = await fileList[0]
+    if(!file.url && !file.preview){
+      file.preview = await getBase64(file.originFileObj);
+    }
+    setstateProductUpdate({
+      ...stateProductUpdate,
+      hinh_anh : file.preview
+    })
+  }
   const handleRowClick = (record, rowIndex) => {
     setRowSelected(record.id)
-    
+    setContent(record)
   }
-
   return (
     <div>
       <WrapperHeader> Quản lý sản phẩm </WrapperHeader>
@@ -258,7 +306,7 @@ const Product = () => {
                         };
                       }}
       />
-      <ModalComponent title="Tạo sản phẩm" open={isModalOpen} onOk={handleOk}  onCancel={handleCancel} footer= {null}>
+      <ModalComponent title="Tạo sản phẩm" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer= {null}>
         <Loading isLoading={isLoading}>
           <Form
           name="basic"
@@ -414,8 +462,7 @@ const Product = () => {
           </Form>
         </Loading>
       </ModalComponent>
-      <DrawerComponent title='Chi tiết sản phẩm' isOpen={isOpenDrawer} onOk={handleOk} onClose={() => setIsOpenDrawer(false)} width="40%">
-        <Loading isLoading={isLoading}>
+      <ModalComponent title='Chi tiết sản phẩm' isOpen={isModalOpenUpdate} onOk={handleOkUpdate} onCancel={handleCancelUpdate} onClose={() => setIsModalOpenUpdate(false)} width="40%">
           <Form
           name="basic"
           labelCol={{ span: 6 }}
@@ -430,14 +477,14 @@ const Product = () => {
             name="id_rem_cua"
             //rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
-            <InputComponentPro className="readonly-input" placeholder={rowSelected} />
+            <InputComponent value={stateProductUpdate.id=rowSelected} onChange={handleOnChangeUpdate} placeholder={rowSelected} />
           </Form.Item>
           <Form.Item
             label="Tên Rèm Cửa"
             name="tenremcua"
             rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
-            <InputComponent value={stateProduct.tenremcua} onChange={handleOnChange} name='tenremcua' />
+            <InputComponent value={stateProductUpdate.tenremcua} onChange={handleOnChangeUpdate} name='tenremcua' content={content.ten_rem}/>
           </Form.Item>
 
           <Form.Item
@@ -445,7 +492,7 @@ const Product = () => {
             name="donvi"
             rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
-            <InputComponent value={stateProduct.donvi} onChange={handleOnChange} name='donvi' />
+            <InputComponent value={stateProductUpdate.donvi} onChange={handleOnChangeUpdate} name='donvi'content={content.don_vi} />
           </Form.Item >
 
           <Form.Item
@@ -453,7 +500,7 @@ const Product = () => {
             name="baohanh"
             rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
-            <InputComponent value={stateProduct.baohanh} onChange={handleOnChange} name='baohanh' />
+            <InputComponent value={stateProductUpdate.baohanh} onChange={handleOnChangeUpdate} name='baohanh'content={content.bao_hanh}/>
           </Form.Item>
 
           <Form.Item
@@ -461,7 +508,7 @@ const Product = () => {
             name="xuatxu"
             rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
-            <InputComponent value={stateProduct.xuatxu} onChange={handleOnChange} name='xuatxu' />
+            <InputComponent value={stateProductUpdate.xuatxu} onChange={handleOnChangeUpdate} name='xuatxu' content={content.xuat_xu}/>
           </Form.Item>
 
           <Form.Item
@@ -469,7 +516,7 @@ const Product = () => {
             name="kichthuoc"
             rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
-            <InputComponent value={stateProduct.kichthuoc} onChange={handleOnChange} name='kichthuoc' />
+            <InputComponent value={stateProductUpdate.kichthuoc} onChange={handleOnChangeUpdate} name='kichthuoc' content={content.kich_thuoc}/>
           </Form.Item>
 
           <Form.Item
@@ -477,7 +524,7 @@ const Product = () => {
             name="trangthai"
             rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
-            <InputComponent value={stateProduct.trangthai} onChange={handleOnChange} name='trangthai' />
+            <InputComponent value={stateProductUpdate.trangthai} onChange={handleOnChangeUpdate} name='trangthai' content={content.trang_thai}/>
           </Form.Item>
 
           <Form.Item
@@ -485,7 +532,7 @@ const Product = () => {
             name="chatlieu"
             rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
-            <InputComponent value={stateProduct.chatlieu} onChange={handleOnChange} name='chatlieu' />
+            <InputComponent value={stateProductUpdate.chatlieu} onChange={handleOnChangeUpdate} name='chatlieu' content={content.chat_lieu}/>
           </Form.Item>
 
           <Form.Item
@@ -493,7 +540,7 @@ const Product = () => {
             name="gia"
             rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
-            <InputComponent value={stateProduct.gia} onChange={handleOnChange} name='gia' />
+            <InputComponent value={stateProductUpdate.gia} onChange={handleOnChangeUpdate} name='gia' content={content.gia_goc}/>
           </Form.Item>
 
           <Form.Item
@@ -501,7 +548,7 @@ const Product = () => {
             name="idloairem"
             rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
-            <Select value={stateProduct.idloairem} onChange={handleOnSelect}
+            <Select value={stateProductUpdate.idloairem} onChange={handleOnSelectUpdate} defaultValue={content.id_loai_rem} 
               options={[
                 {
                   value: '1',
@@ -553,12 +600,12 @@ const Product = () => {
             name="hinh_anh"
             rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
-            <WrapperUploadFile onChange={handleOnChangeAvatar} maxCount={1}>
+            <WrapperUploadFile onChange={handleOnChangeAvatarUpdate} maxCount={1}  > 
               <Button>
                 Select File
               </Button>
-              {stateProduct?.hinh_anh && (
-                <img src= {stateProduct?.hinh_anh} style={{
+              {content.hinh_anh && (
+                <img src= {content.hinh_anh} style={{
                   height: '60px',
                   width: '60px%',
                   borderRadius: '50%',
@@ -567,20 +614,13 @@ const Product = () => {
                 }} alt= "avatar" />
               )}
             </WrapperUploadFile>
-            
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
-            <Button type="primary" htmlType="submit" onClick={summitUpdate}>
-              Update
-            </Button>
           </Form.Item>
           </Form>
-        </Loading>
-      </DrawerComponent>
+      </ModalComponent>
       <ModalComponent title="Xóa sản phẩm" open={isModalOpenDelete} onCancel={handleCancelDelete} onOk={handleDeleteProduct}>
-        <Loading isLoading={isLoadingDeleted}>
           <div>Bạn có chắc xóa sản phẩm này không?</div>
-        </Loading>
       </ModalComponent>
 
     </div>
