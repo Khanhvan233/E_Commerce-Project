@@ -133,16 +133,21 @@ const Product = () => {
         idloairem, 
         gia,
         hinh_anh  
-      })
+      }).then(res => {
+        alert(" Thành công")
+        setIsModalOpenUpdate(false)
+      }).catch(error => {
+        alert(" Thất Bại")
+        setIsModalOpenUpdate(false)
+      });
+  
     }
   )
-
 
   const getAllProducts = async() => {
     const res = await ProductService.getAllProduct()
     return res
   }
-
 
   const handleDeleteProduct =() =>{
     const data = {
