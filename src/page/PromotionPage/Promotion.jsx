@@ -263,9 +263,9 @@ const PromotionPage = () => {
 
       service.UpdatePromotion(data).then(res => {
         callAPIinit();
-        alert("Thêm thành công");
+        alert("Sửa thành công");
       }).catch(error => {
-        alert("Thêm thất bại");
+        alert("Sửa thất bại");
       });
 
 

@@ -9,7 +9,7 @@ export const getAllProduct = async() =>{
     return res.data
 }
 export const getDetailsProduct = async (data) => {
-    const res = await axios.get(`${process.env.REACT_APP_API_URL}/product_get_id`, data)
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/product_get_id`, data)
     return res.data
 }
 export const deleteProduct = async (data) => {

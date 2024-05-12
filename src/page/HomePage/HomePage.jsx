@@ -43,7 +43,7 @@ const HomePage = () => {
                 <CardComponent
                   ten_rem={product.ten_rem}
                   hinh_anh={product.hinh_anh}
-                  trang_thai={product.trang_thai}
+                  so_luong={product.so_luong}
                   gia_goc={product.gia_goc}
                   xuat_xu={product.xuat_xu}
                   bao_hanh={product.bao_hanh}

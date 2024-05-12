@@ -33,7 +33,7 @@ const Product = () => {
     baohanh: "", 
     xuatxu: "", 
     kichthuoc: "", 
-    trangthai: "", 
+    so_luong: "", 
     chatlieu: "", 
     idloairem: "",  
     gia: "",
@@ -46,7 +46,7 @@ const Product = () => {
     baohanh: "", 
     xuatxu: "", 
     kichthuoc: "", 
-    trangthai: "", 
+    so_luong: "", 
     chatlieu: "", 
     idloairem: "",  
     gia: "",
@@ -91,7 +91,7 @@ const Product = () => {
       baohanh, 
       xuatxu, 
       kichthuoc, 
-      trangthai, 
+      so_luong, 
       chatlieu, 
       idloairem, 
       gia,
@@ -101,7 +101,7 @@ const Product = () => {
         baohanh, 
         xuatxu, 
         kichthuoc, 
-        trangthai, 
+        so_luong, 
         chatlieu, 
         idloairem, 
         gia,
@@ -124,7 +124,7 @@ const Product = () => {
       baohanh, 
       xuatxu, 
       kichthuoc, 
-      trangthai, 
+      so_luong, 
       chatlieu, 
       idloairem, 
       gia,
@@ -135,7 +135,7 @@ const Product = () => {
         baohanh, 
         xuatxu, 
         kichthuoc, 
-        trangthai, 
+        so_luong, 
         chatlieu, 
         idloairem, 
         gia,
@@ -204,8 +204,8 @@ const Product = () => {
       dataIndex: 'kich_thuoc',
     },
     {
-      title: 'Trạng thái',
-      dataIndex: 'thang_thai',
+      title: 'Số lượng',
+      dataIndex: 'so_luong',
     },
     {
       title: 'Chât liệu',
@@ -259,7 +259,6 @@ const Product = () => {
   const handleCancelUpdate= () =>{
     setIsModalOpenUpdate(false)
   }
-
 
   const handleCancel = () => {
     setIsModalOpen(false)
@@ -368,11 +367,11 @@ const Product = () => {
           </Form.Item>
 
           <Form.Item
-            label="Trạng Thái"
-            name="trangthai"
+            label="Số lượng"
+            name="so_luong"
             rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
-            <InputComponent value={stateProduct.trangthai} onChange={handleOnChange} name='trangthai' />
+            <InputComponent value={stateProduct.so_luong} onChange={handleOnChange} name='so_luong' />
           </Form.Item>
 
           <Form.Item
@@ -530,11 +529,11 @@ const Product = () => {
           </Form.Item>
 
           <Form.Item
-            label="Trạng Thái"
-            name="trangthai"
+            label="Số lượng"
+            name="so_luong"
             rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
-            <InputComponent value={stateProductUpdate.trangthai} onChange={handleOnChangeUpdate} name='trangthai' content={content.trang_thai}/>
+            <InputComponent value={stateProductUpdate.so_luong} onChange={handleOnChangeUpdate} name='so_luong' content={content.so_luong}/>
           </Form.Item>
 
           <Form.Item

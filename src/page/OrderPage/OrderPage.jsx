@@ -219,7 +219,7 @@ const OrderPage = () => {
           />;
       </div>
       <div>
-          <h1 className="title"> DANH SÁCH SẢN PHẨN CỦA ĐƠN HÀNG </h1>
+          <h1 className="title"> DANH SÁCH SẢN PHẨM CỦA ĐƠN HÀNG </h1>
       </div>
       <div>
       <Table 

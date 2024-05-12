@@ -10,13 +10,13 @@ display: flex;
 `
 export const WrapperStyleNameProduct = styled.h1`
 color: rgb(36,36,36);
-font-size: 24px;
+font-size: 30px;
 font-weigh: 300;
 line-height: 32px;
 word-break: break-word;
 `
 export const WrapperStyleTextSell = styled.span`
-font-size: 15px;
+font-size: 20px;
 color: rgb(120,120,120);
 line-height: 24px;
 `
@@ -31,6 +31,7 @@ font-weigh: 500;
 line-height: 40px;
 margin-right: 8px;
 margin-top:10px;
+color: red;
 `
 export const WrapperAddressProduct = styled.div`
 span.address{
@@ -55,7 +56,7 @@ display: flex;
 gap; 4px;
 align-items: center;
 border-radius: 4px;
-width: 120px;
+width: 60px;
 border: 1px solid #ccc;
 
 `
