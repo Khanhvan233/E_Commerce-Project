@@ -25,7 +25,7 @@ text-align: left;
 
 `
 export const WrapperText2= styled.span`
-font-size: 35px;
+font-size: 17px;
 font-weigh: 500;
 line-height: 40px;
 text-align: left;
@@ -42,7 +42,7 @@ color: rgb( 128,0,128);
 
 export const WrapperText4= styled.span`
 font-size: 18px;
-font-weigh: 500;
+font-weigh: 00;
 line-height: 40px;
 text-align: left;
 color: rgb( 128,0,128);

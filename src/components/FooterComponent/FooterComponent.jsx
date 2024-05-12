@@ -3,14 +3,18 @@ import { Badge, Col, Layout, Row} from 'antd';
 import { WrapperFooter, WrapperTextFooter, WrapperText, WrapperText2, WrapperText3, WrapperText4, WrapperText5 } from './style';
 import ButtonInputSearch from '../ButtonInputSearch/ButtonInputSearch';
 import { useNavigate } from 'react-router-dom';
-import {PhoneOutlined,HomeOutlined,SendOutlined, MailOutlined, RightOutlined, ContactsOutlined} from '@ant-design/icons'
+import {PhoneOutlined,HomeOutlined,InstagramFilled, MailOutlined, FacebookFilled, ContactsOutlined, createFromIconfontCN} from '@ant-design/icons'
 import {
     InstagramOutlined, 
     FacebookOutlined, 
     YoutubeOutlined, 
     GithubOutlined, 
 } from '@ant-design/icons';
+import { Space } from 'antd';
 
+const IconFont = createFromIconfontCN({
+    scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
+  });
 
 const FooterComponent = () => {
     const navigate = useNavigate()
@@ -20,54 +24,35 @@ const FooterComponent = () => {
   return (
     <div style={{width: '100%', background:'rgb(153, 51,, 255)', display:'flex', justifyContent:'center' ,left:'0px', bottom: '0px'}}>
         <WrapperFooter>
-            <Col span={6} style={{display: 'flex', gap:'20px', alignItems:'center', marginLeft: '20px', padding:'15px'}}>
-                <div>
-                    <Row>
-                        <WrapperTextFooter>Chăm sóc khách hàng</WrapperTextFooter>
-                    </Row>
-                    <Row>
-                        <RightOutlined style={{fontSize: '13px', color:'rgb(128,0,128)', marginRight: '5px' }} />
-                        <WrapperText4  onClick={handleNavigateMain} style={{cursor: 'pointer'}}>Trang chủ</WrapperText4>
-                    </Row>
-                    <Row>
-                        <RightOutlined style={{fontSize: '13px', color:'rgb(128,0,128)', marginRight: '5px' }} />
-                        <WrapperText4>Giới thiệu</WrapperText4>
-                    </Row>
-                    <Row>
-                        <RightOutlined style={{fontSize: '13px', color:'rgb(128,0,128)', marginRight: '5px' }} />
-                        <WrapperText4>Danh mục</WrapperText4>
-                    </Row>
-                    <Row>
-                        <RightOutlined style={{fontSize: '13px', color:'rgb(128,0,128)', marginRight: '5px' }} />
-                        <WrapperText4>Hướng dẫn sử dụng</WrapperText4>
-                    </Row>
-                    
-                </div>
-            </Col>
-            <Col span={6} style={{display: 'flex', gap:'20px', alignItems:'center', marginLeft: '-60px', padding:'-60px'}}>
+            
+            <Col span={6} style={{display: 'flex', gap:'20px', alignItems:'center', marginLeft: '120px', padding:'-60px' , marginBottom: '45px'}}>
                 <div>
                 <   Row>
                         <WrapperTextFooter >Về Đại Việt</WrapperTextFooter>
                     </Row>
                     <Row>
-                        <WrapperText2 style={{marginBottom: '80px'}}>Chuyên bán tất cả các loại rèm cửa</WrapperText2>
+                        <WrapperText2 style={{marginBottom: '-10px'}}>Hoạt động trong lĩnh vực thiết kế nội thất, Đại Việt chuyên cung cấp tất các loại rèm nhằm đáp ứng nhu cầu trang trí nhà cửa.</WrapperText2>
                     </Row>
+                    
                 
                 </div>
             </Col>
-            <Col span={6} style={{display: 'flex', gap:'10px', alignItems:'center', marginLeft: '20px', padding:'10px', marginBottom: '40px'}}>
+            <Col span={6} style={{display: 'flex', gap:'10px', alignItems:'center', marginLeft: '60px', padding:'10px', marginBottom: '0px'}}>
                 <div>
                     <Row>
                         <WrapperTextFooter>Thông tin liên hệ</WrapperTextFooter>
                     </Row>
                     <Row>
                         <PhoneOutlined style={{fontSize: '20px', color:'rgb(128,0,128)' , marginRight: '8px'}} />
-                        <WrapperText3>1900 2535</WrapperText3>
+                        <WrapperText4>1900 2535 - 1900 1607</WrapperText4>
                     </Row>
 
                     <Row>
-                        <HomeOutlined style={{fontSize: '20px', color:'rgb(128,0,128)', marginRight: '10px' }} />
-                        <WrapperText4>907b Lữ Gia,Q.11, TPHCM</WrapperText4>
+                        <Col>
+                            <HomeOutlined style={{fontSize: '20px', color:'rgb(128,0,128)', marginRight: '10px' }} />
+                            <WrapperText4>907b Lữ Gia, phường 14 ,Quận 11, Thành phố Hồ Chí Minh</WrapperText4>
+                        </Col>
+                        
                         
                     </Row>
                     
@@ -75,12 +60,12 @@ const FooterComponent = () => {
                     
                         <MailOutlined style={{fontSize: '20px', color:'rgb(128,0,128)', marginRight: '10px'}} />
                         
-                        <WrapperText4> trangtuanminh@gmail.com</WrapperText4>
+                        <WrapperText4> remcuaDaiViet@gmail.com</WrapperText4>
                     </Row>
                     
                 </div>
             </Col>
-            <Col span={6} style={{display: 'flex', gap:'20px', alignItems:'center', marginLeft: '-10px', padding:'-5px', marginBottom:'45px'}}>
+            <Col span={6} style={{display: 'flex', gap:'20px', alignItems:'center', marginLeft: '50px', padding:'-5px', marginBottom:'-10px'}}>
                 <div>
                 <Row>
                     
@@ -98,8 +83,22 @@ const FooterComponent = () => {
                     <ContactsOutlined style={{fontSize: '20px', color:'rgb(128,0,128)' , marginRight: '8px'}} />
                     <WrapperText5>Trang Tuấn Minh - 012345678</WrapperText5>
                 </Row>
+                <Row>
+                    <Space style={{marginLeft: '200px', marginTop: '20px' }}>
+                        <a href='https://www.facebook.com/'>
+                            <FacebookFilled property='Facebook' style={{fontSize: '35px',   }} />
+                            
+                        </a>
+                        <a href='https://www.instagram.com/'>
+                        
+                            <InstagramFilled  property='Instagram' style={{fontSize: '37px', marginLeft: '5px' }} />
+                            
+                        </a>
+                        
+                    </Space>
+                    </Row>
                 </div>
-                
+               
             </Col>
 
         </WrapperFooter>
