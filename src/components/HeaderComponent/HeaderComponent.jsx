@@ -2,22 +2,19 @@ import React, { useState } from 'react'
 import { Badge, Col} from 'antd';
 import { WrapperHeader, WrapperHeaderAccount, WrapperTextHeader, WrapperTextHeaderSmall } from './style';
 import ButtonInputSearch from '../ButtonInputSearch/ButtonInputSearch';
+import { useDispatch } from 'react-redux';
+import * as utills from '../../utills';
 import { useNavigate } from 'react-router-dom';
 import {
   PhoneOutlined,
   ShoppingCartOutlined,
 } from '@ant-design/icons';
-import { updateUser } from '../../redux/slides/userSlide';
-import { useDispatch } from 'react-redux';
-import { searchProduct } from '../../redux/slides/productSlide';
-
 
 
 const HeaderComponent = () => {
   const navigate = useNavigate()
   const dispatch =useDispatch()
   const [search, setSearch] =useState('')
-  const [loading, setLoading] =useState('')
 
   const handleNavigateLogin = () => {
     navigate('/admin')
@@ -25,11 +22,16 @@ const HeaderComponent = () => {
   const handleNavigateMain = () => {
     navigate('/')
   }
+  const handleNavigatecCart = () => {
+    navigate('/cart')
+  }
 
   const onSearch =(e) =>{
     console.log('e',e.target.value)
   }
-
+  const num = utills.getCart()
+  const cartCount = num.length
+   
   return (
     <div style={{width: '100%', background:'rgb(153, 51,, 255)', display:'flex', justifyContent:'center'}}>
       <WrapperHeader>
@@ -59,8 +61,9 @@ const HeaderComponent = () => {
             </div>
           </WrapperHeaderAccount>}
           <div>
-            <Badge count={3} size='small'>
-              <ShoppingCartOutlined style={{fontSize: '30px', color: 'rgb( 172, 59, 97)'}} />  
+            <Badge count={cartCount} size='small'>
+              <ShoppingCartOutlined style={{cursor: 'pointer',fontSize: '30px', color: 'rgb( 172, 59, 97)'}}
+               onClick={handleNavigatecCart}/>  
             </Badge>
             <WrapperTextHeaderSmall>Giỏ hàng</WrapperTextHeaderSmall>
           </div>

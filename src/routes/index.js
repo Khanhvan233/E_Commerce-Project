@@ -58,7 +58,7 @@ export const routes =[
     {
         path: '/cart',
         page: Cart,
-        isShowHeader: false,
+        isShowHeader: true,
         isShowFooter: true
     },
     {
