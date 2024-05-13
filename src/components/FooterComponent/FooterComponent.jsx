@@ -73,15 +73,24 @@ const FooterComponent = () => {
                 </Row>
                 <Row>
                     <ContactsOutlined style={{fontSize: '20px', color:'rgb(128,0,128)' , marginRight: '8px'}} />
-                    <WrapperText5>Mai Thanh Hải - 0987654321</WrapperText5>
+                    <a href='https://www.facebook.com/profile.php?id=100011700110200'>
+                        <WrapperText5 property='Facebook'>Mai Thanh Hải - 0987654321</WrapperText5>
+                    </a>
+                    
                 </Row>
                 <Row>
                     <ContactsOutlined style={{fontSize: '20px', color:'rgb(128,0,128)' , marginRight: '8px'}} />
-                    <WrapperText5>Nguyễn Trần Khánh Văn - 0123459876</WrapperText5>
+                    <a href='https://www.facebook.com/khanhdanbee'>
+                        <WrapperText5 property='Facebook'>Nguyễn Trần Khánh Văn - 0123459876</WrapperText5>
+                    </a>
+                    
                 </Row>
                 <Row>
                     <ContactsOutlined style={{fontSize: '20px', color:'rgb(128,0,128)' , marginRight: '8px'}} />
-                    <WrapperText5>Trang Tuấn Minh - 012345678</WrapperText5>
+                    <a href='https://www.facebook.com/profile.php?id=100014188711112'>
+                        <WrapperText5 property='Facebook' >Trang Tuấn Minh - 012345678</WrapperText5>
+                    </a>
+                    
                 </Row>
                 <Row>
                     <Space style={{marginLeft: '200px', marginTop: '20px' }}>
