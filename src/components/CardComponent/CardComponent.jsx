@@ -7,6 +7,7 @@ import {StarFilled} from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 const CardComponent = (props) => {
   const {ten_rem, hinh_anh, xuat_xu, bao_hanh, gia_goc, chat_lieu, don_vi, so_luong, kich_thuoc, id} =props
+  
   const navigate =useNavigate()
   const handleDetailsProduct=(id) =>{
     navigate(`/product-details/${id}`)

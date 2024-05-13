@@ -51,17 +51,6 @@ const ProductDetailComponent = (id) => {
     const result = utills.getCart();
     console.log(result , " okla 1234");
   }
-  const handleDelete = () => {
-
-    const result1 = utills.getCart();
-    console.log(result1 , " okla 5555");
-
-    utills.deleteCart(13);
-    
-    const result = utills.getCart();
-    console.log(result , " okla")
-    
-  }
   
   return (
       <Row style={{padding: '16px'}}>
@@ -95,9 +84,6 @@ const ProductDetailComponent = (id) => {
           <div style={{paddingTop: '20px', display: 'flex', alignItems:'center', gap: '12px'}}>
             <Button style={{ width: '220px', height: '50px', background: 'rgb(255,57,69)'}} type="primary" onClick={handleOk} >
               Chọn mua
-            </Button>
-            <Button style={{ width: '220px', height: '50px', background: 'rgb(255,57,69)'}} type="primary" onClick={handleDelete} >
-              Xoa
             </Button>
           </div>
         </Col>

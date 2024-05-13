@@ -6,9 +6,7 @@ import ButtonComponent from '../../components/ButtonComponent/ButtonComponent'
 export const WrapperTypeProduct = styled.div`
     font-size: 14px;
     display: flex;
-    align-item: center;
     gap: 30px;
-    justify-content: flex-start;
     height: 44px
 
 `
