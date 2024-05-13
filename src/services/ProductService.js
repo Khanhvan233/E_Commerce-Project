@@ -20,3 +20,8 @@ export const updateProduct = async (data) => {
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/product_update`, data)
     return res.data
 }
+
+export const getType= async (data) => {
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/product_get_loai`, data)
+    return res.data
+}
