@@ -11,6 +11,10 @@ export function GetProductOrder(data){
     return axios.post(`${process.env.REACT_APP_API_URL}/order_get_id`,data);
 }
 
+export function addOrder(data){
+    return axios.post(`${process.env.REACT_APP_API_URL}/order_add`,data);
+}
+
 
 
 export function GetAllStatus(){

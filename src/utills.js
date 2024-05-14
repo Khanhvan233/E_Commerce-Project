@@ -46,3 +46,4 @@ export const deleteCart = (id) => {
     // Lưu lại mảng đã cập nhật vào Local Storage
     localStorage.setItem('cart', JSON.stringify(existingCart));
 };
+

@@ -21,7 +21,7 @@ export const WrapperItemOrder = styled.div`
 export const WrapperCountOrder  = styled.div`
 display: flex;
 align-items: center;
-width: 84px;
+width: 60px;
 border: 1px solid #ccc;
 border-radius: 4px;
 `

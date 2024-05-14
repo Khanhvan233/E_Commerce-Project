@@ -42,14 +42,17 @@ const ProductDetailComponent = (id) => {
   console.log(dataGlobe)
 
   const handleOk = () => {
+    utills.deleteCart(dataGlobe.id)
     const data = {
       id : dataGlobe.id,
-      so_luong : quantity
+      so_luong : quantity,
+      con_lai: dataGlobe.so_luong,
+      hinh_anh: dataGlobe.hinh_anh,
+      gia:dataGlobe.gia_ap_dung
     }
     utills.saveCart(data);
-
     const result = utills.getCart();
-    console.log(result , " okla 1234");
+    console.log(result);
   }
   
   return (
@@ -70,7 +73,7 @@ const ProductDetailComponent = (id) => {
             <WrapperStyleTextSell>   | Còn lại {dataGlobe.so_luong}</WrapperStyleTextSell>
           </div>
           <WrapperPriceProduct>
-            <WrapperPriceTextProduct>{dataGlobe.gia_goc}</WrapperPriceTextProduct>
+            <WrapperPriceTextProduct>{dataGlobe.gia_ap_dung}</WrapperPriceTextProduct>
           </WrapperPriceProduct>
           <WrapperAddressProduct>
             <span>Giao từ</span>
