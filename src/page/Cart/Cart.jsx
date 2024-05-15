@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { WrapperLeft, WrapperRight, WrapperInfo, WrapperTotal,WrapperCountOrder, WrapperItemOrder, WrapperListOrder, WrapperInputNumber} from './style'
-import { Button, Form } from 'antd'
+import { Button, Form, Select } from 'antd'
 import remcua1 from '../../assets/images/remcua1.jpg'
 import { DeleteOutlined, MinusOutlined, PlusOutlined} from '@ant-design/icons'
 import ModalComponent from '../../components/ModalComponent/ModalComponent'
@@ -8,7 +8,7 @@ import InputComponent from '../../components/InputComponent/InputComponent'
 import * as utills from '../../utills';
 import { useQuery } from '@tanstack/react-query'
 import { useForm } from 'antd/es/form/Form'
-import * as OrerService from  '../../services/OrderService'
+import * as OrderService from  '../../services/OrderService'
 import * as ProductService from  '../../services/ProductService'
 const Cart = () => {
   const [form] = useForm();
@@ -19,8 +19,8 @@ const Cart = () => {
     dia_chi: "", 
     sdt: "", 
     id_trang_thai: "1", 
-    id_hinh_thuc: "1", 
-    rem: [],
+    id_hinh_thuc: "", 
+    rems: [],
   })
 
   const loadLocalStorage =() =>{
@@ -28,8 +28,15 @@ const Cart = () => {
     return res
   }
 
+  const handleOnSelect = (value) => {
+    setStateOrder({
+      ...stateOrder,
+      id_hinh_thuc: value
+    });
+  };
+
   const {data: localData} = useQuery({queryKey: ['local-storage'], queryFn: loadLocalStorage})
-  console.log(localData)
+  
   const handleOnChange =(e) => {
     setStateOrder({
       ...stateOrder,
@@ -38,14 +45,14 @@ const Cart = () => {
     console.log('e.target.name: ', e.target.name, e.target.value );
   }
 
-  const handleSetData = () => {
+
+  const handleConfirmOrder =() =>{
     setStateOrder((prevState) => ({
       ...prevState,
-      rem: localStorage,
+      rem: localData,
     }));
-  };
-  const handleConfirmOrder =() =>{
-    OrerService.addOrder(stateOrder).then(res => {
+    console.log(stateOrder)
+    OrderService.addOrder(stateOrder).then(res => {
       alert(" Thành công")
       setIsModalOpen(false)
     }).catch(error => {
@@ -107,13 +114,6 @@ const Cart = () => {
                     <span>Thông tin đơn hàng</span>
                   </div>
                 </WrapperInfo>
-                <WrapperInfo>
-                  <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '13px'}}>
-                    <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px',color:'blue'}} onClick={() => setIsModalOpen(true)}>
-                      Thêm thông tin giao hàng ở đây
-                    </span>
-                  </div>
-                </WrapperInfo>
                 <WrapperTotal>
                   <span>Tổng tiền</span>
                   <span style={{display:'flex', flexDirection: 'column'}}>
@@ -128,8 +128,10 @@ const Cart = () => {
                     background: 'rgb(255, 57, 69)',
                     height: '48px',
                     width: '320px',
-                    borderRadius: '4px'
+                    borderRadius: '4px',
+                    cursor: 'pointer'
                 }}
+                onClick={() => setIsModalOpen(true)}
               >
                 Thanh toán
               </Button>
@@ -139,7 +141,7 @@ const Cart = () => {
       <div style={{height: '50px'}}>
 
       </div>
-      <ModalComponent title="Thêm thông tin giao hàng" open={isModalOpen} onOk={handleOK} onCancel={handleCancel}>
+      <ModalComponent title="Thêm thông tin giao hàng" open={isModalOpen} onOk={handleConfirmOrder} onCancel={handleCancel}  width="40%">
           <Form
           name="basic"
           labelCol={{ span: 6 }}
@@ -181,6 +183,25 @@ const Cart = () => {
             ]}
           >
             <InputComponent value={stateOrder.sdt} onChange={handleOnChange} name='sdt' />
+          </Form.Item>
+
+          <Form.Item
+            label="Hình thức thanh toán"
+            name="id_hinh_thuc"
+            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
+          >
+            <Select value={stateOrder.id_hinh_thuc} onChange={handleOnSelect}
+              options={[
+                {
+                  value: '1',
+                  label: 'MOMO',
+                },
+                {
+                  value: '2',
+                  label: 'Thanh toán khi nhận hàng (COD)',
+                },
+              ]}
+              />
           </Form.Item>
           </Form>
       </ModalComponent>
