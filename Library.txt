@@ -12,3 +12,4 @@ npm install axios jsonwebtoken
 =======
 npm install react-datepicker 
 >>>>>>> f97dc5a1ea84814fdc2a4d9b916b5b1e7bdd2879
+npm install react-icons

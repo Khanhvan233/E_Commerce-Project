@@ -3,10 +3,11 @@ import HomePage from "../page/HomePage/HomePage";
 import NotFoundPage from "../page/NotFoundPage/NotFoundPage";
 import OrderPage from "../page/OrderPage/OrderPage";
 import ProductDetailPage from "../page/ProductDetailPage/ProductDetailPage";
-import ProductsPage from "../page/ProductsPage/ProductsPage";
 import SignInPage from "../page/SignInPage/SignInPage";
 import TypeProductPage from "../page/TypeProductPage/TypeProductPage";
-import PromotionPage from "../page/PromotionPage/Promotion";
+import SearchPage from "../page/SearchPage/SearchPage";
+import Cart from "../page/Cart/Cart";
+import PaymentPage from "../page/SearchPage/SearchPage";
 
 
 export const routes =[
@@ -18,16 +19,11 @@ export const routes =[
 
     },
     {
-        path: '/order',
-        page: OrderPage,
-        isShowHeader: false,
-        isShowFooter: false
-    },
-    {
-        path: '/products',
-        page: ProductsPage,
+        path: '/search',
+        page: SearchPage,
         isShowHeader: true,
         isShowFooter: true
+
     },
     {
         path: '*',
@@ -35,14 +31,14 @@ export const routes =[
 
     },
     {
-        path: '/type',
+        path: '/type/:id',
         page: TypeProductPage,
         isShowHeader: true,
         isShowFooter: true
         
     },
     {
-        path: '/product-details',
+        path: '/product-details/:id',
         page: ProductDetailPage,
         isShowHeader: true,
         isShowFooter: true
@@ -60,9 +56,15 @@ export const routes =[
         isShowFooter: true
     },
     {
-        path: '/promotion',
-        page: PromotionPage,
+        path: '/cart',
+        page: Cart,
+        isShowHeader: true,
+        isShowFooter: true
+    },
+    {
+        path: '/pay',
+        page: PaymentPage,
         isShowHeader: false,
-        isShowFooter: false
+        isShowFooter: true
     },
 ]

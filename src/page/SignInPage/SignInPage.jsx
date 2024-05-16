@@ -32,14 +32,14 @@ const SignInPage = () => {
     .then(response => {
       if (response.status === 200) {
         setIsLoggedIn(true) //oke
-        message.success('Login successful')
+        alert(" Đăng nhập thành công")
         navigate('/system/admin')
       } else {
-        message.error('We couldn’t find an account matching the email and password you entered. Please check your email and password and try again.')
+        alert('Tài khoản hoặc mật khẩu sai! Vui lòng thử lại')
       }
     })
     .catch(error => {
-      message.warning('Fail to login because of some error')
+      alert('Không thể đăng nhập do không tải được cơ sở dữ liệu')
       // Xử lý lỗi hoặc hiển thị thông báo lỗi  
     })
   }

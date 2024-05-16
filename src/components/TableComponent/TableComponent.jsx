@@ -15,7 +15,10 @@ const rowSelection = {
       name: record.name,
     }),
   }
-
+  const paginationConfig = {
+    pageSize: 7 // Số sản phẩm hiển thị trên mỗi trang
+  };
+  
   return (
     <Loading isLoading={isLoading}>
       <Table
@@ -25,6 +28,7 @@ const rowSelection = {
         }}
         columns={columns}
         dataSource={data}
+        pagination={paginationConfig}
         {...props}
       />
     </Loading>

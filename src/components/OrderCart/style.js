@@ -3,10 +3,10 @@ import {Card} from 'antd'
 
 
 export const WrapperCardStyle = styled(Card)`
-    width: 200px;
+    width: 600px;
     & img {
-        height: 200px;
-        width: 200px;
+        height: 30px;
+        width: 30px;
     },
     position: relative;
     background-color: ${props => props.disabled ? '#ccc' : '#fff'};
