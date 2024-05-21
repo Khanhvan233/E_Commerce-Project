@@ -35,10 +35,6 @@ const OrderPage = () => {
     }
   ];
 
-
-
-  
-
   const columnsOrder = [
     {
       title: "ID",
