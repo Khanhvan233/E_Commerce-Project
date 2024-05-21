@@ -67,4 +67,10 @@ export const routes =[
         isShowHeader: false,
         isShowFooter: true
     },
+    {
+        path: '/search/:data',
+        page: SearchPage,
+        isShowHeader: true,
+        isShowFooter: true
+    },
 ]

@@ -55,6 +55,7 @@ const Cart = () => {
     OrderService.addOrder(stateOrder).then(res => {
       alert(" Thành công")
       setIsModalOpen(false)
+      localStorage.clear();
     }).catch(error => {
       alert(" Thất Bại")
       setIsModalOpen(false)

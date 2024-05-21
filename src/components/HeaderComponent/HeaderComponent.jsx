@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Badge, Col} from 'antd';
+import { Badge, Col, Input} from 'antd';
 import { WrapperHeader, WrapperHeaderAccount, WrapperTextHeader, WrapperTextHeaderSmall } from './style';
 import ButtonInputSearch from '../ButtonInputSearch/ButtonInputSearch';
 import { useDispatch } from 'react-redux';
@@ -9,10 +9,12 @@ import {
   PhoneOutlined,
   ShoppingCartOutlined,
 } from '@ant-design/icons';
+import ButtonComponent from '../ButtonComponent/ButtonComponent';
 
 
 const HeaderComponent = () => {
   const navigate = useNavigate()
+  const [stateInput, setStateInput]=useState('')
   const dispatch =useDispatch()
   const [search, setSearch] =useState('')
 
@@ -25,13 +27,20 @@ const HeaderComponent = () => {
   const handleNavigatecCart = () => {
     navigate('/cart')
   }
-
+  const handleInputKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      // Chuyển hướng khi ấn Enter
+      navigate(`/search/${stateInput}`)
+      window.location.reload();
+    }
+  }
+   
   const onSearch =(e) =>{
-    console.log('e',e.target.value)
+    setStateInput(e.target.value)
   }
   const num = utills.getCart()
   const cartCount = num.length
-   
+ 
   return (
     <div style={{width: '100%', background:'rgb(153, 51,, 255)', display:'flex', justifyContent:'center'}}>
       <WrapperHeader>
@@ -41,13 +50,12 @@ const HeaderComponent = () => {
             </div>
         </Col>
         <Col span={13}>
-          <ButtonInputSearch
-            size="large"  
-            bordered="false"
-            textButton="Tìm kiếm"
-            placeholder="input search text"
-            onChange={onSearch}
-         />
+          <Input
+              placeholder="nhập từ khóa tìm kiếm"
+              style={{backgroudColor: '#fff', borderRadius: '4px 0 0 4px'}}
+              onChange={onSearch}
+              onKeyDown={handleInputKeyDown}
+          />
         </Col>
         <Col span={6} style={{display: 'flex', gap:'54px', alignItems:'center'}}>
           { <WrapperHeaderAccount>
