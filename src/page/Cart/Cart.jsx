@@ -18,7 +18,7 @@ const Cart = () => {
     email: "", 
     dia_chi: "", 
     sdt: "", 
-    id_trang_thai: "1", 
+    id_trang_thai: "3", 
     id_hinh_thuc: "", 
     rems: [],
   })
