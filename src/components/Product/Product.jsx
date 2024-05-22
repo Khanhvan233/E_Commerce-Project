@@ -108,10 +108,11 @@ const Product = () => {
         hinh_anh  
       }).then(res => {
         alert(" Thành công")
-        setIsModalOpenUpdate(false)
+        setIsModalOpen(false)
+        window.location.reload();
       }).catch(error => {
         alert(" Thất Bại")
-        setIsModalOpenUpdate(false)
+        setIsModalOpen(false)
       });
       
     }
@@ -142,6 +143,8 @@ const Product = () => {
         hinh_anh  
       }).then(res => {
         alert(" Thành công")
+        isModalOpenUpdate(false)
+        window.location.reload();
       }).catch(error => {
         alert(" Thất Bại")
         
@@ -163,6 +166,7 @@ const Product = () => {
     ProductService.deleteProduct(data).then(res => {
       alert(" Thành công")
       setIsModalOpenDelete(false)
+      window.location.reload();
     }).catch(error => {
       alert(" Thất Bại")
       setIsModalOpenDelete(false)

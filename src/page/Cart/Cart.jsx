@@ -68,10 +68,12 @@ const Cart = () => {
   const handleOK = async () => {
     setIsModalOpen(false)
   };
-
+  const handleReload = async () => {
+    window.location.reload();
+  }
 
   return (
-    <div style={{background: '#f5f5fa', with: '100%', height: '100%'}}>
+    <div style={{background: '#f5f5fa', with: '100%', height: '100%', height:'700px'}}>
       <div>
         <div style={{width:'1900px', height: '50px', fontSize:'25px', alignContent:'center', display:'flex',justifyContent:'center'  }}>
         </div>
@@ -101,7 +103,11 @@ const Cart = () => {
                     <WrapperInputNumber defaultValue={cart.so_luong} size="small" min={1} max={cart.con_lai} />
                   </WrapperCountOrder>
                   <span style={{color: 'rgb(255, 66, 78)', fontSize: '13px', fontWeight: 500}}>{cart.gia}</span>
-                  <DeleteOutlined style={{cursor: 'pointer'}} />
+                  <DeleteOutlined style={{cursor: 'pointer'}}
+                  onClick={() => {
+                    utills.deleteCart(cart.id);
+                    window.location.reload();
+                  }} />
                 </div>
               </WrapperItemOrder>
                )

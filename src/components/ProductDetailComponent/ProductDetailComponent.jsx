@@ -19,7 +19,8 @@ const ProductDetailComponent = (id) => {
     so_luong: "", 
     chatlieu: "", 
     idloairem: "",  
-    gia: "",
+    gia_goc: "",
+    gia_ap_dung:"",
     hinh_anh : "" 
   });
 
@@ -54,6 +55,7 @@ const ProductDetailComponent = (id) => {
     const result = utills.getCart();
     console.log(result);
   }
+  const giaOK=dataGlobe.gia_ap_dung
   
   return (
       <Row style={{padding: '16px'}}>
@@ -73,7 +75,10 @@ const ProductDetailComponent = (id) => {
             <WrapperStyleTextSell>   | Còn lại {dataGlobe.so_luong}</WrapperStyleTextSell>
           </div>
           <WrapperPriceProduct>
-            <WrapperPriceTextProduct>{dataGlobe.gia_ap_dung}</WrapperPriceTextProduct>
+            <WrapperPriceTextProduct>
+              <span style={{marginRight: '8px'}}>{giaOK.toLocaleString()}</span>
+              <span>&#8363;</span>
+              </WrapperPriceTextProduct>
           </WrapperPriceProduct>
           <WrapperAddressProduct>
             <span>Giao từ</span>

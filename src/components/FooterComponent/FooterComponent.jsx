@@ -28,7 +28,7 @@ const FooterComponent = () => {
             <Col span={6} style={{display: 'flex', gap:'20px', alignItems:'center', marginLeft: '120px', padding:'-60px' , marginBottom: '45px'}}>
                 <div>
                 <   Row>
-                        <WrapperTextFooter >Về Đại Việt</WrapperTextFooter>
+                        <WrapperTextFooter onClick={handleNavigateMain} style={{cursor: 'pointer'}} >Rèm Cửa Đại Việt</WrapperTextFooter>
                     </Row>
                     <Row>
                         <WrapperText2 style={{marginBottom: '-10px'}}>Hoạt động trong lĩnh vực thiết kế nội thất, Đại Việt chuyên cung cấp tất các loại rèm nhằm đáp ứng nhu cầu trang trí nhà cửa.</WrapperText2>
