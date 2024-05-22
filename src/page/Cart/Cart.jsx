@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { WrapperLeft, WrapperRight, WrapperInfo, WrapperTotal,WrapperCountOrder, WrapperItemOrder, WrapperListOrder, WrapperInputNumber} from './style'
 import { Button, Form, Select } from 'antd'
-import remcua1 from '../../assets/images/remcua1.jpg'
 import { DeleteOutlined, MinusOutlined, PlusOutlined} from '@ant-design/icons'
 import ModalComponent from '../../components/ModalComponent/ModalComponent'
 import InputComponent from '../../components/InputComponent/InputComponent'
@@ -11,7 +10,6 @@ import { useForm } from 'antd/es/form/Form'
 import * as OrderService from  '../../services/OrderService'
 import * as ProductService from  '../../services/ProductService'
 const Cart = () => {
-  const [form] = useForm();
   const [stateCart, setStateCart] =useState('')
   const [cartItems, setCartItems] = useState([])
   const [stateOrder, setStateOrder] = useState({
@@ -20,8 +18,17 @@ const Cart = () => {
     sdt: "", 
     id_trang_thai: "3", 
     id_hinh_thuc: "", 
-    rems: [],
+    rems: "",
   })
+  const [ dataStorage, setDataStorage] = useState({
+    id: "", 
+    so_luong: "",  
+    gia: "",
+    hinh_anh : "", 
+    con_lai: ""
+  });
+
+  const [form] = Form.useForm();
 
   const loadLocalStorage =() =>{
     const res = utills.getCart()
@@ -36,7 +43,11 @@ const Cart = () => {
   };
 
   const {data: localData} = useQuery({queryKey: ['local-storage'], queryFn: loadLocalStorage})
-  
+
+  let totalPrice = '';
+  if (localData && localData.length > 0) {
+    totalPrice = localData.reduce((total, item) => total + (item.gia * item.so_luong), 0);
+  }
   const handleOnChange =(e) => {
     setStateOrder({
       ...stateOrder,
@@ -47,19 +58,23 @@ const Cart = () => {
 
 
   const handleConfirmOrder =() =>{
-    setStateOrder((prevState) => ({
-      ...prevState,
-      rem: localData,
-    }));
-    console.log(stateOrder)
-    OrderService.addOrder(stateOrder).then(res => {
-      alert(" Thành công")
-      setIsModalOpen(false)
-      localStorage.clear();
-    }).catch(error => {
-      alert(" Thất Bại")
-      setIsModalOpen(false)
-    });
+    if (localData && localData.length > 0){
+      setStateOrder((prevState) => ({
+        ...prevState,
+        rems: localData,
+      }));
+      console.log(stateOrder)
+      if (stateOrder && stateOrder.rems.length > 0){
+        console.log(stateOrder)
+        OrderService.addOrder(stateOrder).then(res => {
+          alert(" Thành công")
+          setIsModalOpen(false)
+          localStorage.clear();
+        }).catch(error => {
+          alert(" Thất Bại")
+        });
+      }
+    }
   }
   const [isModalOpen, setIsModalOpen] = useState(false)
   const handleCancel =() =>{
@@ -124,7 +139,7 @@ const Cart = () => {
                 <WrapperTotal>
                   <span>Tổng tiền</span>
                   <span style={{display:'flex', flexDirection: 'column'}}>
-                    <span style={{color: 'rgb(254, 56, 52)', fontSize: '24px', fontWeight: 'bold'}}>200.000</span>
+                    <span style={{color: 'rgb(254, 56, 52)', fontSize: '24px', fontWeight: 'bold'}}>{totalPrice.toLocaleString()}</span>
                     <span style={{color: '#000', fontSize: '11px'}}>(Đã bao gồm VAT nếu có)</span>
                   </span>
                 </WrapperTotal>
@@ -155,6 +170,7 @@ const Cart = () => {
           wrapperCol={{ span: 18 }}
           style={{ maxWidth: 600 }}
           autoComplete="off"
+          form={form}
         >
           <Form.Item
             label="Địa chỉ EMAIL"

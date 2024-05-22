@@ -373,7 +373,10 @@ const Product = () => {
           <Form.Item
             label="Số lượng"
             name="so_luong"
-            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
+            rules={[
+              { required: true, message: 'Không Được Bỏ Trống!' },
+              { pattern: /^[0-9]*$/, message: 'Chỉ chấp nhận số nguyên!' }
+            ]}
           >
             <InputComponent value={stateProduct.so_luong} onChange={handleOnChange} name='so_luong' />
           </Form.Item>
@@ -389,7 +392,10 @@ const Product = () => {
           <Form.Item
             label="Giá cả "
             name="gia"
-            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
+            rules={[
+              { required: true, message: 'Không Được Bỏ Trống!' },
+              { pattern: /^[0-9]*$/, message: 'Chỉ chấp nhận số nguyên!' }
+            ]}
           >
             <InputComponent value={stateProduct.gia} onChange={handleOnChange} name='gia' />
           </Form.Item>
@@ -535,7 +541,10 @@ const Product = () => {
           <Form.Item
             label="Số lượng"
             name="so_luong"
-            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
+            rules={[
+              { required: true, message: 'Không Được Bỏ Trống!' },
+              { pattern: /^[0-9]*$/, message: 'Chỉ chấp nhận số nguyên!' }
+            ]}
           >
             <InputComponent value={stateProductUpdate.so_luong} onChange={handleOnChangeUpdate} name='so_luong' content={content.so_luong}/>
           </Form.Item>
@@ -551,7 +560,10 @@ const Product = () => {
           <Form.Item
             label="Giá cả "
             name="gia"
-            rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
+            rules={[
+              { required: true, message: 'Không Được Bỏ Trống!' },
+              { pattern: /^[0-9]*$/, message: 'Chỉ chấp nhận số nguyên!' }
+            ]}
           >
             <InputComponent value={stateProductUpdate.gia} onChange={handleOnChangeUpdate} name='gia' content={content.gia_goc}/>
           </Form.Item>
