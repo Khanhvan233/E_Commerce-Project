@@ -5,8 +5,11 @@ export const WrapperListOrder = styled.div`
 export const WrapperInputNumber = styled(InputNumber)`
 &.ant-input-number.ant-input-number-sm {
     width: 60px;
+    height: 25px;
     border-top: none;
     border-bottom: none;
+    border: 1px solid #ccc;
+    border-radius: 4px; 
     &.ant-input-number-handler-wrap{
         display: none;
 }
@@ -21,9 +24,8 @@ export const WrapperItemOrder = styled.div`
 export const WrapperCountOrder  = styled.div`
 display: flex;
 align-items: center;
-width: 60px;
-border: 1px solid #ccc;
-border-radius: 4px;
+width: 100px;
+
 `
 export const WrapperRight = styled.div`
   width: 320px;

@@ -49,7 +49,8 @@ const ProductDetailComponent = (id) => {
       so_luong : quantity,
       con_lai: dataGlobe.so_luong,
       hinh_anh: dataGlobe.hinh_anh,
-      gia:dataGlobe.gia_ap_dung
+      gia:dataGlobe.gia_ap_dung,
+      ten_rem: dataGlobe.ten_rem
     }
     utills.saveCart(data);
     const result = utills.getCart();

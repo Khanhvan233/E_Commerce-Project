@@ -12,6 +12,7 @@ import * as ProductService from  '../../services/ProductService'
 const Cart = () => {
   const [stateCart, setStateCart] =useState('')
   const [cartItems, setCartItems] = useState([])
+  const [quantity, setQuantity] = useState(1)
   const [stateOrder, setStateOrder] = useState({
     email: "", 
     dia_chi: "", 
@@ -34,7 +35,24 @@ const Cart = () => {
     const res = utills.getCart()
     return res
   }
-
+  const handleChangeQuantity =(newValue) =>{
+    setQuantity(newValue)
+  }
+ 
+ 
+  const handleConfirmQuantity = (id, con_lai, hinh_anh, gia, ten_rem) => {
+    utills.deleteCart(id)
+    const data = {
+      id : id,
+      so_luong : quantity,
+      con_lai: con_lai,
+      hinh_anh: hinh_anh,
+      gia:gia,
+      ten_rem:ten_rem,
+    }
+    utills.saveCart(data);
+    window.location.reload();
+  }
   const handleOnSelect = (value) => {
     setStateOrder({
       ...stateOrder,
@@ -43,11 +61,19 @@ const Cart = () => {
   };
 
   const {data: localData} = useQuery({queryKey: ['local-storage'], queryFn: loadLocalStorage})
+  console.log(localData)
+  const calculateTotalPrice = () => {
+    if (!localData || localData.length === 0) {
+      return 0;
+    }
+  
+    return localData.reduce((acc, currentItem) => {
+      return acc + (currentItem.so_luong * currentItem.gia);
+    }, 0);
+  };
+  
+  const totalPrice = calculateTotalPrice();
 
-  let totalPrice = '';
-  if (localData && localData.length > 0) {
-    totalPrice = localData.reduce((total, item) => total + (item.gia * item.so_luong), 0);
-  }
   const handleOnChange =(e) => {
     setStateOrder({
       ...stateOrder,
@@ -97,7 +123,7 @@ const Cart = () => {
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', height: '100%'}}>
           <WrapperLeft>
-          <WrapperListOrder>
+          <WrapperListOrder>  
           {localData?.map((cart) => {
               return (
             <WrapperItemOrder>
@@ -107,17 +133,31 @@ const Cart = () => {
                     width: 260,
                     overflow: 'hidden',
                     textOverflow:'ellipsis',
-                    whiteSpace:'nowrap'
-                  }}>Rem ngủ</div>
+                    whiteSpace:'nowrap',
+                    fontSize:'15px',
+                    marginLeft: '8px'
+                  }}>{cart.ten_rem}</div>
                 </div>
                 <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                   <span>
                     <span style={{ fontSize: '13px', color: '#242424' }}>{cart.gia}</span>
                   </span>
                   <WrapperCountOrder>
-                    <WrapperInputNumber defaultValue={cart.so_luong} size="small" min={1} max={cart.con_lai} />
+                    <WrapperInputNumber 
+                      defaultValue={cart.so_luong} 
+                      size="small" min={1}
+                      max={cart.con_lai} 
+                      onChange={handleChangeQuantity}
+                    />
+                    <Button 
+                      style={{padding:'1px', height:'25px', width: '40px'}} 
+                      onClick={() => handleConfirmQuantity(cart.id, cart.con_lai, cart.hinh_anh, cart.gia, cart.ten_rem)}
+                    >
+                      Oke
+                    </Button>
                   </WrapperCountOrder>
-                  <span style={{color: 'rgb(255, 66, 78)', fontSize: '13px', fontWeight: 500}}>{cart.gia}</span>
+                  
+                  <span style={{color: 'rgb(255, 66, 78)', fontSize: '13px', fontWeight: 500}}>{cart.con_lai}</span>
                   <DeleteOutlined style={{cursor: 'pointer'}}
                   onClick={() => {
                     utills.deleteCart(cart.id);
