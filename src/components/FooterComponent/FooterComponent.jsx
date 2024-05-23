@@ -95,7 +95,7 @@ const FooterComponent = () => {
                         <span onClick={handleNavigateMomo}  style={{cursor: 'pointer'}}>
                         <img src={iconmomo} style={{ marginRight: '5px', height: '35px' }} />
                         </span>
-                        <a href='https://www.facebook.com/'>
+                        <a href='https://www.facebook.com/profile.php?id=61559295657021'>
                             <FacebookFilled property='Facebook' style={{fontSize: '35px',   }} />
                             
                         </a>

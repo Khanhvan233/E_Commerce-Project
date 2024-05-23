@@ -1,11 +1,12 @@
 import React from 'react'
 import { TypeProduct } from '../../components/TypeProduct/TypeProduct'
 import { WrapperButtonMore, WrapperProducts, WrapperTypeProduct } from './style'
-import slider1 from '../../assets/images/slider.webp'
-import slider2 from '../../assets/images/slider2.ws.jpg'
-import slider3 from '../../assets/images/slider3.ws.jpg'
-import slider4 from '../../assets/images/slider4.ws.jpg'
-import slider6 from '../../assets/images/slider6.ws.jpg'
+import s1 from '../../assets/images/s1.png'
+import s2 from '../../assets/images/s2.png'
+import s3 from '../../assets/images/s3.png'
+import s4 from '../../assets/images/s4.png'
+import s5 from '../../assets/images/s5.png'
+
 import SliderComponent from '../../components/SliderComponent/SliderComponet'
 import CardComponent from '../../components/CardComponent/CardComponent.jsx'
 import * as ProductService from  '../../services/ProductService.js'
@@ -62,7 +63,7 @@ const HomePage = () => {
         </div>
         <div className='body' style={{ width: '100%', backgroundColor: '#efefef', }}>
         <div id="container" style={{ height: '100%', width: '1660px', margin: '0 auto' }}>
-          <SliderComponent arrImages={[slider1, slider2, slider3, slider4, slider6]} />
+          <SliderComponent arrImages={[s1, s2, s3, s4, s5]} />
           <WrapperProducts>
             {products?.map((product) => {
               return (
