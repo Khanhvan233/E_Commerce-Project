@@ -8,6 +8,7 @@ import TypeProductPage from "../page/TypeProductPage/TypeProductPage";
 import SearchPage from "../page/SearchPage/SearchPage";
 import Cart from "../page/Cart/Cart";
 import PaymentPage from "../page/SearchPage/SearchPage";
+import MomoPage from "../page/MomoPage/Momo";
 
 
 export const routes =[
@@ -70,6 +71,12 @@ export const routes =[
     {
         path: '/search/:data',
         page: SearchPage,
+        isShowHeader: true,
+        isShowFooter: true
+    },
+    {
+        path: '/momo',
+        page: MomoPage,
         isShowHeader: true,
         isShowFooter: true
     },

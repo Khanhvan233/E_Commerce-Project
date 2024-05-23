@@ -3,13 +3,8 @@ import { Badge, Col, Layout, Row} from 'antd';
 import { WrapperFooter, WrapperTextFooter, WrapperText, WrapperText2, WrapperText3, WrapperText4, WrapperText5 } from './style';
 import ButtonInputSearch from '../ButtonInputSearch/ButtonInputSearch';
 import { useNavigate } from 'react-router-dom';
+import iconmomo from '../../assets/images/iconmomo.png'
 import {PhoneOutlined,HomeOutlined,InstagramFilled, MailOutlined, FacebookFilled, ContactsOutlined, createFromIconfontCN} from '@ant-design/icons'
-import {
-    InstagramOutlined, 
-    FacebookOutlined, 
-    YoutubeOutlined, 
-    GithubOutlined, 
-} from '@ant-design/icons';
 import { Space } from 'antd';
 
 const IconFont = createFromIconfontCN({
@@ -21,6 +16,9 @@ const FooterComponent = () => {
     const handleNavigateMain = () => {
     navigate('/')
 }
+    const handleNavigateMomo = () => {
+        navigate('/momo')
+    }
   return (
     <div style={{width: '100%', background:'rgb(153, 51,, 255)', display:'flex', justifyContent:'center' ,left:'0px', bottom: '0px'}}>
         <WrapperFooter>
@@ -94,16 +92,16 @@ const FooterComponent = () => {
                 </Row>
                 <Row>
                     <Space style={{marginLeft: '200px', marginTop: '20px' }}>
+                        <span onClick={handleNavigateMomo}  style={{cursor: 'pointer'}}>
+                        <img src={iconmomo} style={{ marginRight: '5px', height: '35px' }} />
+                        </span>
                         <a href='https://www.facebook.com/'>
                             <FacebookFilled property='Facebook' style={{fontSize: '35px',   }} />
                             
                         </a>
-                        <a href='https://www.instagram.com/'>
-                        
-                            <InstagramFilled  property='Instagram' style={{fontSize: '37px', marginLeft: '5px' }} />
-                            
-                        </a>
-                        
+                        <a href='https://www.instagram.com/khanhdanbee/'>
+                            <InstagramFilled property='Instagram' style={{fontSize: '37px', marginLeft: '5px', color: '#E1306C' }} />
+                        </a>   
                     </Space>
                     </Row>
                 </div>
