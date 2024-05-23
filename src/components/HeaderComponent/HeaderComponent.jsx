@@ -70,7 +70,7 @@ const HeaderComponent = () => {
           </WrapperHeaderAccount>}
           <div>
             <Badge count={cartCount} size='small'>
-              <ShoppingCartOutlined style={{cursor: 'pointer',fontSize: '30px', color: 'rgb( 172, 59, 97)'}}
+              <ShoppingCartOutlined style={{cursor: 'pointer',fontSize: '30px', color: 'rgb( 150, 71, 52)'}}
                onClick={handleNavigatecCart}/>  
             </Badge>
             <WrapperTextHeaderSmall>Giỏ hàng</WrapperTextHeaderSmall>

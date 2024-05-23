@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {Input} from 'antd';
 
 const InputComponentPro = ({style, placeholder, bordered, size, values, handleInputChange, ...rests}) => {
-
     return (
    <Input
         size={size} 

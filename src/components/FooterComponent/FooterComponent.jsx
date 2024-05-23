@@ -41,13 +41,13 @@ const FooterComponent = () => {
                         <WrapperTextFooter>Thông tin liên hệ</WrapperTextFooter>
                     </Row>
                     <Row>
-                        <PhoneOutlined style={{fontSize: '20px', color:'rgb(128,0,128)' , marginRight: '8px'}} />
+                        <PhoneOutlined style={{fontSize: '20px', color:'rgb(251, 233, 208)' , marginRight: '8px'}} />
                         <WrapperText4>1900 2535 - 1900 1607</WrapperText4>
                     </Row>
 
                     <Row>
                         <Col>
-                            <HomeOutlined style={{fontSize: '20px', color:'rgb(128,0,128)', marginRight: '10px' }} />
+                            <HomeOutlined style={{fontSize: '20px', color:'rgb(251, 233, 208)', marginRight: '10px' }} />
                             <WrapperText4>907b Lữ Gia, phường 14 ,Quận 11, Thành phố Hồ Chí Minh</WrapperText4>
                         </Col>
                         
@@ -56,7 +56,7 @@ const FooterComponent = () => {
                     
                     <Row>
                     
-                        <MailOutlined style={{fontSize: '20px', color:'rgb(128,0,128)', marginRight: '10px'}} />
+                        <MailOutlined style={{fontSize: '20px', color:'rgb(251, 233, 208)', marginRight: '10px'}} />
                         
                         <WrapperText4> remcuaDaiViet@gmail.com</WrapperText4>
                     </Row>
@@ -70,21 +70,21 @@ const FooterComponent = () => {
                     <WrapperTextFooter>Kết nối với chúng tôi</WrapperTextFooter>
                 </Row>
                 <Row>
-                    <ContactsOutlined style={{fontSize: '20px', color:'rgb(128,0,128)' , marginRight: '8px'}} />
+                    <ContactsOutlined style={{fontSize: '20px', color:'rgb(251, 233, 208)' , marginRight: '8px'}} />
                     <a href='https://www.facebook.com/profile.php?id=100011700110200'>
                         <WrapperText5 property='Facebook'>Mai Thanh Hải - 0987654321</WrapperText5>
                     </a>
                     
                 </Row>
                 <Row>
-                    <ContactsOutlined style={{fontSize: '20px', color:'rgb(128,0,128)' , marginRight: '8px'}} />
+                    <ContactsOutlined style={{fontSize: '20px', color:'rgb(251, 233, 208)' , marginRight: '8px'}} />
                     <a href='https://www.facebook.com/khanhdanbee'>
                         <WrapperText5 property='Facebook'>Nguyễn Trần Khánh Văn - 0123459876</WrapperText5>
                     </a>
                     
                 </Row>
                 <Row>
-                    <ContactsOutlined style={{fontSize: '20px', color:'rgb(128,0,128)' , marginRight: '8px'}} />
+                    <ContactsOutlined style={{fontSize: '20px', color:'rgb(251, 233, 208)' , marginRight: '8px'}} />
                     <a href='https://www.facebook.com/profile.php?id=100014188711112'>
                         <WrapperText5 property='Facebook' >Trang Tuấn Minh - 012345678</WrapperText5>
                     </a>
