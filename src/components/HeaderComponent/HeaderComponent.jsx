@@ -42,7 +42,7 @@ const HeaderComponent = () => {
   const cartCount = num.length
  
   return (
-    <div style={{width: '100%', background:'rgb(153, 51,, 255)', display:'flex', justifyContent:'center'}}>
+    <div style={{width: '100%', background:'rgb(185, 149,, 115)', display:'flex', justifyContent:'center'}}>
       <WrapperHeader>
         <Col span={5} style={{display: 'flex', gap:'20px', alignItems:'center', marginLeft: '40px'}}>
             <div onClick={handleNavigateMain} style={{cursor: 'pointer'}}>
@@ -61,7 +61,7 @@ const HeaderComponent = () => {
           { <WrapperHeaderAccount>
             <PhoneOutlined style={{fontSize: '30px'}}/>
             
-            <div onClick={handleNavigateLogin} style={{cursor: 'pointer'}}>
+            <div>
               <WrapperTextHeaderSmall style={{fontSize: '13px'}}>Liên hệ chăm sóc khách hàng</WrapperTextHeaderSmall>
               <div>
                 <WrapperTextHeaderSmall style={{fontSize: '13px'}}>0123456789</WrapperTextHeaderSmall> 

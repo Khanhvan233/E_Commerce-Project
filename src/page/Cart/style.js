@@ -55,3 +55,12 @@ export const WrapperTotal = styled.div`
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
 `
+export const WrapperStatus = styled.div`
+  display:flex;
+  align-item:flex-start;
+  width: 100%;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(235, 235, 240);
+  flex-direction:column;
+`

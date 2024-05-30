@@ -8,7 +8,7 @@ export const WrapperSliderStyle = styled(Slider)`
         z-index: 10;
         &::before {
             font-size: 40px;
-            color: #fff;
+            color: #007080;
         }
     }
     & .slick-arrow.slick-next {
@@ -17,7 +17,7 @@ export const WrapperSliderStyle = styled(Slider)`
         z-index: 10;
         &::before {
             font-size: 40px;
-            color: #fff;
+            color: #007080;
         }
     }
     & .slick-dots {
@@ -26,7 +26,7 @@ export const WrapperSliderStyle = styled(Slider)`
         li {
             button {
                 &::before {
-                    color: rgb(255, 255, 0.5);
+                    color: #007080;
                 }
             }
         }

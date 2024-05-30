@@ -29,7 +29,7 @@ const FooterComponent = () => {
                         <WrapperTextFooter onClick={handleNavigateMain} style={{cursor: 'pointer'}} >Rèm Cửa Đại Việt</WrapperTextFooter>
                     </Row>
                     <Row>
-                        <WrapperText2 style={{marginBottom: '-10px'}}>Hoạt động trong lĩnh vực thiết kế nội thất, Đại Việt chuyên cung cấp tất các loại rèm nhằm đáp ứng nhu cầu trang trí nhà cửa.</WrapperText2>
+                        <WrapperText2 style={{marginBottom: '-10px'}}>Rèm cửa Đại Việt là một dự án được thiết kế cho môn thương mại điện tử nhầm mục đích hiểu rõ cách thiết kế và hoạt động của một trang web thương mại điện tử.</WrapperText2>
                     </Row>
                     
                 
@@ -67,7 +67,7 @@ const FooterComponent = () => {
                 <div>
                 <Row>
                     
-                    <WrapperTextFooter>Kết nối với chúng tôi</WrapperTextFooter>
+                    <WrapperTextFooter>Bản quyền thuộc về</WrapperTextFooter>
                 </Row>
                 <Row>
                     <ContactsOutlined style={{fontSize: '20px', color:'rgb(251, 233, 208)' , marginRight: '8px'}} />
