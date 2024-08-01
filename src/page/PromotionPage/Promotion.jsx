@@ -12,7 +12,7 @@ import {Input} from 'antd'
 const PromotionPage = () => {
     const [columns, setColumns] = useState([]);
     const [data, setData] = useState([]);
-    const [dataRem, setDataRem] = useState([]);
+    const [dataProduct, setDataProduct] = useState([]);
     const [id, setID] = useState(null);
     const [name, setName] = useState(null);
     const [percent, setPercent] = useState(null);
@@ -22,55 +22,57 @@ const PromotionPage = () => {
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const { Option } = Select
 
+
+
     const columnsRem = [
       {
         title: "ID",
-        dataIndex: "id",
-        key: "id"
+        dataIndex: "Id",
+        key: "Id"
       },
       {
-        title: "Tên Rèm",
-        dataIndex: "name",
-        key: "name"
+        title: "Tên Sản Phẩm",
+        dataIndex: "Name",
+        key: "Name"
       },
       {
-        title: "Giá gốc",
-        dataIndex: "originalPrice",
-        key: "originalPrice"
+        title: "Giá",
+        dataIndex: "PriceApply",
+        key: "PriceApply"
       },
       {
-        title: "Giá Áp Dụng",
-        dataIndex: "appliedPrice",
-        key: "appliedPrice"
+        title: "Số Lượng",
+        dataIndex: "Quantity",
+        key: "Quantity"
       }
     ];
     
     // hàm này xử lý khi nhấn vào môth hàng trong bảng
     const handleRowClick = (record, rowIndex) => {
-      setID(record.id);
-      setName(record.ten);
-      setPercent(record.phan_tram);
-
-      const ngayBatDau = new Date(record.ngaybatdau);
+      setID(record.promotionID);
+      setName(record.NamePromotion);
+      setPercent(record.Discount);
+      console.log(record.NamePromotion)
+      const ngayBatDau = new Date(record.Datestart);
       setDateStart(ngayBatDau);
 
-      const ngayKetThuc = new Date(record.ngayketthuc);
+      const ngayKetThuc = new Date(record.Dateend);
       setDateEnd(ngayKetThuc);
 
       const data = {
-        id: record.id
+        promotionID: record.promotionID
       };
 
-      service.GetProductPromotion(data).then(data => {
+      service.GetProductPromotion(data.promotionID).then(data => {
         console.log(data['data']);
         const filteredData = data.data.map(item => ({
-          key: item.id, 
-          id: item.id,
-          name: item.ten_rem,
-          originalPrice: item.gia_goc,
-          appliedPrice: item.gia_ap_dung
+          key: item.Id,
+          Id: item.Id,
+          Name: item.Name,
+          PriceApply: item.PriceApply,
+          Quantity: item.Quantity
         }));
-        setDataRem(filteredData);
+        setDataProduct(filteredData);
 
       }).catch(error => {
         console.error("Failed to fetch promotion:", error); 
@@ -83,26 +85,26 @@ const PromotionPage = () => {
     const handleChange = (value, option) => {
       for (const opt of options) {
 
-        if(opt.id == option.key){
-          for(const rem of dataRem){
-            if(rem.id == opt.id){
+        if(opt.Id === option.key){
+          for(const product of dataProduct){
+            if(product.Id === opt.Id){
               alert(" Rèm cửa này bạn đã chọn !");
               return 
             }
           }          
           const filteredData = {
-            key: opt.id, 
-            id: opt.id,
-            name: opt.ten_rem,
-            originalPrice: opt.gia_goc,
-            appliedPrice: opt.gia_ap_dung
+            key: opt.Id,
+            Id: opt.Id,
+            Name: opt.Name,
+            PriceApply: opt.PriceApply,
+            Quantity: opt.Quantity
           };
+          console.log(filteredData);
+          //console.log(opt.gia_ap_dung , " clmmmm");
 
-          console.log(opt.gia_ap_dung , " clmmmm");
 
 
-
-          setDataRem([...dataRem, filteredData]);
+          setDataProduct([...dataProduct, filteredData]);
 
         }
       }
@@ -124,7 +126,7 @@ const PromotionPage = () => {
               key: index, 
               ...item
             }));
-    
+            console.log(newData);
             setColumns(columns);
             setData(newData);
           }
@@ -148,9 +150,9 @@ const PromotionPage = () => {
     // sự kiện xoá một rèm cửa trong khuyến mãi
     const deleteRem = () => {
       for(const index of selectedRowKeys){
-        const filteredData = dataRem.filter(item => item.id !== index);
-        setDataRem(filteredData);
-        
+        const filteredData = dataProduct.filter(item => item.Id !== index);
+        setDataProduct(filteredData);
+        console.log(filteredData);
       }
         
     };
@@ -168,12 +170,12 @@ const PromotionPage = () => {
 
     //sự kiện thêm một khuyến mãi
     const addKhuyenMai = () =>{
-      const list_rem = []
-      for(const rem of dataRem){
-        list_rem.push(rem.id);
+      const list_product = []
+      for(const proc of dataProduct){
+        list_product.push(proc.Id);
       }
       
-      if (list_rem.length === 0) {
+      if (list_product.length === 0) {
         alert("Danh sách rèm cửa áp dụng khuyến mãi này không được để trống");
         return;
       } else if (name.length === 0) {
@@ -185,11 +187,12 @@ const PromotionPage = () => {
       }
 
       const data = {
-        ten: name,
-        ngaybatdau: formatDate(dateStart),
-        ngayketthuc: formatDate(dateEnd),
-        phantram : percent,
-        list_rem : list_rem
+        NamePromotion: name,
+        staffID: 1,
+        Datestart: formatDate(dateStart),
+        Dateend: formatDate(dateEnd),
+        Discount : percent,
+        list_product : list_product
       }
 
       service.AddPromotion(data).then(res => {
@@ -222,7 +225,7 @@ const PromotionPage = () => {
       }      
 
       const data = {
-        id: id
+        promotionID: id
       };
 
       service.DeletePromotion(data).then(res => {
@@ -236,12 +239,12 @@ const PromotionPage = () => {
 
     // Sự kiện sửa khuyến mãi
     const updateKM = () => {
-      const list_rem = []
-      for(const rem of dataRem){
-        list_rem.push(rem.id);
+      const list_proc = []
+      for(const proc of dataProduct){
+        list_proc.push(proc.Id);
       }
       
-      if (list_rem.length === 0) {
+      if (list_proc.length === 0) {
         alert("Danh sách rèm cửa áp dụng khuyến mãi này không được để trống");
         return;
       } else if (name.length === 0) {
@@ -253,16 +256,18 @@ const PromotionPage = () => {
       }
 
       const data = {
-        id: id,
-        ten: name,
-        ngaybatdau: formatDate(dateStart),
-        ngayketthuc: formatDate(dateEnd),
-        phantram : percent,
-        list_rem : list_rem
+        promotionID: id,
+        NamePromotion: name,
+        Datestart: formatDate(dateStart),
+        Dateend: formatDate(dateEnd),
+        Discount : percent,
+        list_product : list_proc
       }
 
       service.UpdatePromotion(data).then(res => {
+        console.log(data)
         callAPIinit();
+        window.location.reload();
         alert("Sửa thành công");
       }).catch(error => {
         alert("Sửa thất bại");
@@ -316,26 +321,28 @@ const PromotionPage = () => {
             <Select
               showSearch
               style={{ width: '100%' }}  
-              placeholder="Chọn Rèm Cửa"  
+              placeholder="Chọn Sản Phẩm"  
               optionFilterProp="children" 
               onChange={handleChange}
             >
+              
              {options.map(opt => (
-                <Option key={opt.id} value={opt.ten_rem}></Option>
+                <Option key={opt.Id} value={opt.Name}></Option>
               ))}
           </Select>
 
           </div>
         <div>
           <Table 
+            pagination={{ pageSize: 3 }}
             rowSelection={{
               type: 'checkbox',
               selectedRowKeys,
               onChange: onSelectChange,
             }}
             columns={columnsRem} 
-            dataSource={dataRem}>
-            pagination={{ pageSize: 5 }}
+            dataSource={dataProduct}>
+            
           </Table>
         </div>
 

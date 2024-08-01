@@ -3,24 +3,28 @@ import axios from "axios";
 
 
 export function GetAllOrder(){
-    return axios.get(`${process.env.REACT_APP_API_URL}/order_get`);
+    const apiURL = 'http://localhost:8082/order/getallOrder'
+    return axios.get(apiURL);
 }
 
 
-export function GetProductOrder(data){
-    return axios.post(`${process.env.REACT_APP_API_URL}/order_get_id`,data);
+export async function GetProductOrder(orderID){
+    const response = await axios.get(`http://localhost:8082/order/getallorderid?orderID=${orderID}`);
+    return response;
 }
 
 export const addOrder = async(data) =>{
-    const res = await axios.post(`${process.env.REACT_APP_API_URL}/order_add`, data)
+    const res = await axios.post(`http://localhost:8082/order/createorder`, data)
     return res.data
 }
 
 export function GetAllStatus(){
-    return axios.get(`${process.env.REACT_APP_API_URL}/trang_thai`);
+    const apiURL = 'http://localhost:8082/order/getallStatus'
+    return axios.get(apiURL);
 }
 
 
 export function UpdateOrderStutus(data){
-    return axios.post(`${process.env.REACT_APP_API_URL}/order_update_status`,data);
+    const apiURL = 'http://localhost:8082/order/updatestatusorder'
+    return axios.put(apiURL,data);
 }

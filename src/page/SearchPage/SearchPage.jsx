@@ -12,7 +12,7 @@ const SearchPage = () => {
     keyword: data
   }
   const getSearchProduct = async() => {
-    const res = ProductService.searchProduct(dataType)
+    const res = ProductService.searchProduct(dataType.keyword)
     return res
   }
    const { data : products} = useQuery({queryKey: ['products'], queryFn: getSearchProduct})
@@ -28,16 +28,13 @@ const SearchPage = () => {
               {products?.map((product) => {
                 return (
                   <CardComponent
-                    ten_rem={product.ten_rem}
-                    hinh_anh={product.hinh_anh}
-                    so_luong={product.so_luong}
-                    gia_goc={product.gia_goc}
-                    xuat_xu={product.xuat_xu}
-                    bao_hanh={product.bao_hanh}
-                    chat_lieu={product.chat_lieu}
-                    don_vi={product.don_vi}
-                    kich_thuoc={product.kich_thuoc}
-                    id={product.id}
+                    Name = {product.Name}
+                    Quantity = {product.Quantity}
+                    Description = {product.Description}
+                    type_ID = {product.type_ID}
+                    Price = {product.PriceApply}
+                    Image = {product.Image}
+                    Id ={product.Id}
                   />
                 )
               })}

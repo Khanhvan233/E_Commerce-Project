@@ -11,25 +11,27 @@ import { useNavigate } from 'react-router-dom';
 const SignInPage = () => {
 
   const [isShowPassword, setIsShowPassword] = useState(false)
-  const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleOnchangeEmail = (value) => {
-    setEmail(value)
+  const handleOnchangeName = (value) => {
+    setName(value)
   }
   const handleOnchangePassword = (value) => {
     setPassword(value)
   }
   const handleSignIn = () => {
-    axios.get(`${process.env.REACT_APP_API_URL}/login`, {
+    const apiUrl = 'http://localhost:8082/staff/getuserPass';
+    axios.get(apiUrl, {
       params: {
-        username: email,
-        password: password
+        Name: name,
+        Password: password
       }
     })
     .then(response => {
+      console.log(response);
       if (response.status === 200) {
         setIsLoggedIn(true) //oke
         alert(" Đăng nhập thành công")
@@ -39,7 +41,7 @@ const SignInPage = () => {
       }
     })
     .catch(error => {
-      alert('Không thể đăng nhập do không tải được cơ sở dữ liệu')
+      alert('Tài Khoản và Mật Khẩu bạn nhập không có trong hệ thống')
       // Xử lý lỗi hoặc hiển thị thông báo lỗi  
     })
   }
@@ -50,7 +52,7 @@ const SignInPage = () => {
         <WrapperContainerLeft>
           <h1>Xin chào</h1>
           <p>Đăng nhập bằng tài khoản Admin</p>
-          <InputForm style={{marginBottom: '10px'}} placeholder='Username' value={email} onChange={handleOnchangeEmail} />
+          <InputForm style={{marginBottom: '10px'}} placeholder='Username' value={name} onChange={handleOnchangeName} />
           <div style={{position: 'relative'}}>
             <span 
               onClick={() => setIsShowPassword(!isShowPassword)}
@@ -73,7 +75,7 @@ const SignInPage = () => {
               />
           </div>
           <ButtonComponent
-            disabled={!email.length || !password.length} //no active log in 
+            disabled={!name.length || !password.length} //no active log in 
             onClick={handleSignIn}
             bordered ={false}
             size={40}

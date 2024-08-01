@@ -8,9 +8,10 @@ import { useNavigate } from 'react-router-dom';
 import {
   PhoneOutlined,
   ShoppingCartOutlined,
+  LoginOutlined
 } from '@ant-design/icons';
 import ButtonComponent from '../ButtonComponent/ButtonComponent';
-
+import '../HeaderComponent/style.css';
 
 const HeaderComponent = () => {
   const navigate = useNavigate()
@@ -42,11 +43,11 @@ const HeaderComponent = () => {
   const cartCount = num.length
  
   return (
-    <div style={{width: '100%', background:'rgb(185, 149,, 115)', display:'flex', justifyContent:'center'}}>
+    <div className="header-container" style={{width: '100%', background:'rgb(185, 149,, 115)', display:'flex', justifyContent:'center'}}>
       <WrapperHeader>
         <Col span={5} style={{display: 'flex', gap:'20px', alignItems:'center', marginLeft: '40px'}}>
             <div onClick={handleNavigateMain} style={{cursor: 'pointer'}}>
-              <WrapperTextHeader>Rèm Cửa Đại Việt</WrapperTextHeader>
+              <WrapperTextHeader>Nhà Sách Tuấn Minh</WrapperTextHeader>
             </div>
         </Col>
         <Col span={13}>
@@ -59,12 +60,11 @@ const HeaderComponent = () => {
         </Col>
         <Col span={6} style={{display: 'flex', gap:'54px', alignItems:'center'}}>
           { <WrapperHeaderAccount>
-            <PhoneOutlined style={{fontSize: '30px'}}/>
-            
+            <LoginOutlined style={{fontSize: '30px'}} onClick={handleNavigateLogin}/>
             <div>
-              <WrapperTextHeaderSmall style={{fontSize: '13px'}}>Liên hệ chăm sóc khách hàng</WrapperTextHeaderSmall>
+              <WrapperTextHeaderSmall style={{fontSize: '13px'}}>Đăng nhập</WrapperTextHeaderSmall>
               <div>
-                <WrapperTextHeaderSmall style={{fontSize: '13px'}}>0123456789</WrapperTextHeaderSmall> 
+                <WrapperTextHeaderSmall style={{fontSize: '13px'}}>Cho nhân viên</WrapperTextHeaderSmall> 
               </div>
             </div>
           </WrapperHeaderAccount>}

@@ -1,45 +1,51 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef  } from 'react'
 import {Table, Select } from 'antd';
 import './style.css';
 import * as service from '../../services/OrderService';
 import InputComponentPro from '../../components/InputComponent/InputComponentPro';
 import ButtonClickComponent from '../../components/ButtonComponent/ButtonClickComponent';
-
+import ReactToPrint from 'react-to-print';
 const OrderPage = () => {
   const [data, setData] = useState([]);
   const [id, setID] = useState(null);
-  const [dataRem, setDataRem] = useState([]);
+  const [total, settotal] = useState(null);
+  const [email, setemail] = useState(null);
+  const [phone, setphone] = useState(null);
+  const [address, setaddress] = useState(null);
+  const [dataProduct, setDataProdcut] = useState([]);
   const [options, setOptions] = useState([]); 
   const [selectedKey, setSelectedKey] = useState();
   const { Option } = Select
-  const columnsRem = [
+  const invoiceRef = useRef();
+
+  const columnsProdcut = [
     {
       title: "ID",
-      dataIndex: "id",
-      key: "id"
+      dataIndex: "Id",
+      key: "Id"
     },
     {
-      title: "Tên Rèm",
-      dataIndex: "name",
-      key: "name"
+      title: "Tên",
+      dataIndex: "Name",
+      key: "Name"
     },
     {
-      title: "Giá gốc",
-      dataIndex: "originalPrice",
-      key: "originalPrice"
+      title: "Số Lượng",
+      dataIndex: "Quantity",
+      key: "Quantity",
     },
     {
-      title: "Giá Áp Dụng",
-      dataIndex: "appliedPrice",
-      key: "appliedPrice"
+      title: "Giá",
+      dataIndex: "Total",
+      key: "Total"
     }
   ];
 
   const columnsOrder = [
     {
       title: "ID",
-      dataIndex: "id",
-      key: "id"
+      dataIndex: "orderID",
+      key: "orderID"
     },
     {
       title: "Email",
@@ -48,33 +54,33 @@ const OrderPage = () => {
     },
     {
       title: "Địa chỉ",
-      dataIndex: "dia_chi",
-      key: "dia_chi"
+      dataIndex: "address",
+      key: "address"
     },
     {
       title: "SDT",
-      dataIndex: "sdt",
-      key: "sdt"
+      dataIndex: "phone",
+      key: "phone"
     },
     {
       title: "Thành tiền",
-      dataIndex: "thanh_tien",
-      key: "thanh_tien"
+      dataIndex: "total",
+      key: "total"
     },
     {
-      title: "Hình thức",
-      dataIndex: "hinh_thuc",
-      key: "hinh_thuc"
+      title: "Trạng Thái`",
+      dataIndex: "NameStatus",
+      key: "NameStatus"
     },
     {
-      title: "Trạng thái",
-      dataIndex: "trangthai",
-      key: "trangthai"
+      title: "Hình Thức",
+      dataIndex: "NamePayment",
+      key: "NamePayment"
     },
     {
       title: "Ngày tạo",
-      dataIndex: "ngay_tao",
-      key: "ngay_tao"
+      dataIndex: "datestart",
+      key: "datestart"
     },
   ];
 
@@ -83,16 +89,16 @@ const OrderPage = () => {
       const newData = []
       for(const order of data.data){
         const dataTable = {
-          id : order.id,
+          orderID : order.orderID,
           email : order.email,
-          dia_chi : order.dia_chi,
-          sdt : order.sdt,
-          thanh_tien : order.thanh_tien,
-          hinh_thuc : order.hinh_thuc,
-          trangthai : order.trangthai,
-          ngay_tao : order.ngay_tao,
-          id_hinhthuc : order.id_hinh_thuc,
-          id_trang_thai : order.id_trang_thai
+          address : order.address,
+          phone : order.phone,
+          total : order.total,
+          NamePayment : order.NamePayment,
+          NameStatus : order.NameStatus,
+          datestart : order.datestart,
+          IDpayment : order.IDpayment,
+          IDstatus : order.IDstatus
          }
          newData.push(dataTable)
       }
@@ -100,6 +106,7 @@ const OrderPage = () => {
 
       service.GetAllStatus().then(response => {
         setOptions(response.data);
+        console.log(options)
       }).catch(error => {
         alert(" Sever không phản hồi ");
       });
@@ -115,27 +122,35 @@ const OrderPage = () => {
     callAPIinit();
   }, []);
 
+  
+
   const handleRowClick = (record, rowIndex) => {
-    setID(record.id);
-    console.log(record.trangthai);
-    setSelectedKey(record.trangthai);
-
-    const data = {
-      id: record.id
+    setID(record.orderID);
+    console.log(record.NameStatus);
+    setSelectedKey(record.NameStatus);
+    settotal(record.total);
+    setemail(record.email);
+    setphone(record.phone);
+    setaddress(record.address);
+    console.log(record.total);
+    const dataProductOder = {
+      orderID: record.orderID
     };
+    console.log( record.orderID)
 
-    service.GetProductOrder(data).then(data => {
+    service.GetProductOrder(dataProductOder.orderID).then(data => {
+      console.log( data)
       const filteredData = data.data.map(item => ({
-        key: item.id_remcua, 
-        id: item.id_remcua,
-        name: item.ten_rem,
-        originalPrice: item.gia_goc,
-        appliedPrice: item.gia_ap_dung
+        key: item.Id,
+        Id: item.Id,
+        Name: item.Name,
+        Quantity: item.Quantity,
+        Total: item.Total
       }));
-      setDataRem(filteredData);
-
+      setDataProdcut(filteredData);
+      console.log( filteredData );
     }).catch(error => {
-      console.error("Failed to fetch promotion:", error); 
+      console.error("Failed to fetch  :", error); 
       alert("Sever không phản hồi vui lòng gọi lại sau");
   });
 
@@ -143,25 +158,28 @@ const OrderPage = () => {
   };
 
   const handleChange = (value, option) => {
+    console.log(value)
     setSelectedKey(value);
+    console.log(selectedKey)
   }
 
   const updateOrder = () => {
-    let id_trang_thai = null
+    let IDstatus = null
     for(const opt of options){
-      if(opt.ten == selectedKey){
-        id_trang_thai = opt.id
+      console.log(opt.NameStatus)
+      if(opt.NameStatus === selectedKey){
+        IDstatus = opt.IDstatus
       }
     }
 
-    if(id_trang_thai === null){
+    if(IDstatus === null){
       alert("Trạng thái không hợp lệ");
       return
     }
 
     const data = {
-      id: id,
-      id_trang_thai : id_trang_thai
+      orderID: id,
+      IDstatus : IDstatus
     }
 
     service.UpdateOrderStutus(data).then(res => {
@@ -192,12 +210,18 @@ const OrderPage = () => {
               value={selectedKey} 
             >
              {options.map(opt => (
-                <Option key={opt.id} value={opt.ten}></Option>
+                <Option key={opt.IDstatus} value={opt.NameStatus}></Option>
               ))}
           </Select>
 
-          <ButtonClickComponent textButton="Cập nhật trạng thái" className="button-style" onClick={updateOrder}/>
+          <ButtonClickComponent style={{ width: '45%',marginLeft: '30px' }} textButton="Cập nhật trạng thái" className="button-style" onClick={updateOrder}/>
             
+          <ReactToPrint
+            trigger={() => (
+              <ButtonClickComponent style={{ width: '50%', marginLeft: '0px' }} textButton="In hóa đơn" />
+            )}
+            content={() => invoiceRef.current}
+          />
 
 
 
@@ -219,13 +243,41 @@ const OrderPage = () => {
       </div>
       <div>
       <Table 
-            columns={columnsRem} 
-            dataSource={dataRem}>
+            columns={columnsProdcut} 
+            dataSource={dataProduct}>
             pagination={{ pageSize: 5 }}
           </Table>
 
       </div>
-
+      <div style={{ display: 'none' }}>
+        <div ref={invoiceRef} style={{ padding: '20px', border: '1px solid #ddd' }}>
+          <h1>Hóa Đơn</h1>
+          <p>ID Đơn hàng: {id}</p>
+          <p>Trạng thái: {selectedKey}</p>
+          <p>Email: {email}</p>
+          <p>Số Điện Thoại: {phone}</p>
+          <p>Địa Chỉ: {address}</p>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr>
+                <th style={{ border: '1px solid #ddd', padding: '8px' }}>Sản phẩm</th>
+                <th style={{ border: '1px solid #ddd', padding: '8px' }}>Số lượng</th>
+                <th style={{ border: '1px solid #ddd', padding: '8px' }}>Giá</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dataProduct.map((item, index) => (
+                <tr key={index}>
+                  <td style={{ border: '1px solid #ddd', padding: '8px' }}>{item.Name}</td>
+                  <td style={{ border: '1px solid #ddd', padding: '8px' }}>{item.Quantity}</td>
+                  <td style={{ border: '1px solid #ddd', padding: '8px' }}>{item.Total}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+            <h2 style={{ marginTop: '20px', marginLeft: '600px' }}>Tổng tiền: {total} VND</h2>
+        </div>
+      </div>
     </div>
     
   )

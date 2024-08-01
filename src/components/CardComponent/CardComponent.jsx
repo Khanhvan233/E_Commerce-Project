@@ -5,24 +5,34 @@ import logo from '../../assets/images/logo.png'
 import { StyleNameProduct, WrapperCardStyle, WrapperDiscountText, WrapperPriceText, WrapperReportText } from './style'
 import {StarFilled} from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 const CardComponent = (props) => {
-  const {ten_rem, hinh_anh, xuat_xu, bao_hanh, gia_goc, chat_lieu, don_vi, so_luong, kich_thuoc, id} =props
-  
+  const {Name ,
+    Quantity,
+    Description,
+    type_ID,
+    Price ,
+    Image, Id} =props
+    console.log(Image)
   const navigate =useNavigate()
   const handleDetailsProduct=(id) =>{
+    console.log(id)
     navigate(`/product-details/${id}`)
   }
+
+
   return (
     <WrapperCardStyle
             hoverable
             headStyle={{ width: '200px', height: '200px' }}
             style={{ width: 200 }}
             bodyStyle={{ padding: '8px' }}
-            cover={<img alt="example" src={hinh_anh} />}
-            onClick={() => handleDetailsProduct(id)}
+            cover={<img src={Image} />}
+            onClick={() => handleDetailsProduct(Id)}
         >
             <img
-                src={logo}
+                src={Image}
+                alt={Image}
                 style={{
                     width: '68px',
                     height: '14px',
@@ -34,19 +44,17 @@ const CardComponent = (props) => {
             />
       <Flex gap="4px 0" wrap="wrap">
       </Flex>
-    <StyleNameProduct>{ten_rem}</StyleNameProduct>
+    <StyleNameProduct>{Name}</StyleNameProduct>
       <WrapperReportText>
         <span style={{marginRight: '4px'}}>
-          <span>{chat_lieu}</span>
+          <span>{Description}</span>
         </span>
-        <span>| Còn lại {so_luong}</span> 
+        <span>| Còn lại {Quantity}</span> 
       </WrapperReportText>
        <WrapperPriceText>
-        <span style={{marginRight: '8px'}}>{gia_goc.toLocaleString()}</span>
-        <span>&#8363;</span>
-        
+        <span style={{marginRight: '8px'}}>{Price.toLocaleString()}</span>
+        <span>&#8363;</span>    
       </WrapperPriceText> 
-      <span style={{fontSize:'11px'}}>  Made in {xuat_xu}</span>
     </WrapperCardStyle>
   )
 }

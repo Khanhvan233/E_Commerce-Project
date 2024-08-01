@@ -6,7 +6,8 @@ import s2 from '../../assets/images/s2.png'
 import s3 from '../../assets/images/s3.png'
 import s4 from '../../assets/images/s4.png'
 import s5 from '../../assets/images/s5.png'
-
+import { useEffect, useState } from 'react'
+import '../HomePage/style.css';
 import SliderComponent from '../../components/SliderComponent/SliderComponet'
 import CardComponent from '../../components/CardComponent/CardComponent.jsx'
 import * as ProductService from  '../../services/ProductService.js'
@@ -18,66 +19,101 @@ const HomePage = () => {
 
   const navigate =useNavigate()
 
-  const handleTypeProduct=(idloairem) =>{
-    navigate(`/type/${idloairem}`)
+  const handleTypeProduct=(Id) =>{
+    navigate(`/type/${Id}`)
   }
   const getAllProducts = async() => {
     const res = await ProductService.getAllProduct()
+    console.log(res)
     return res
   }
   const { data : products} = useQuery({queryKey: ['products'], queryFn: getAllProducts})
 
+  const [blobUrls, setBlobUrls] = useState({});
+
+  const bufferToBlob = (buffer) => {
+    return new Blob([new Uint8Array(buffer)], { type: 'image/jpeg' });
+  };
+  
+  const createBlobUrl = (blob) => {
+    return URL.createObjectURL(blob);
+  };
+
+
+
+  useEffect(() => {
+    const fetchBlobUrls = async () => {
+      if (products) {
+        const urls = {};
+        for (let product of products) {
+          try {
+            // Chuyển đổi mảng byte thành Blob
+            const blob = bufferToBlob(product.Image.data);
+            // Tạo URL blob từ Blob
+            const url = createBlobUrl(blob);
+            urls[product.Id] = url;
+            console.log(url);
+          } catch (error) {
+            console.error(`Error fetching image for product ${product.Id}:`, error);
+            // Sử dụng hình ảnh dự phòng nếu fetch thất bại
+          }
+        }
+        setBlobUrls(urls);
+        console.log(blobUrls)
+        
+      }
+    };
+    fetchBlobUrls();
+  }, [products]);
+
+
+
   return (
     <>
-      <div style={{textAlign: 'center', width: '1900px', marginTop: '12px', height: '40px'}}>
-        <span style={{marginLeft : '60px',cursor: 'pointer', fontSize:'20px', marginRight:'60px'}} onClick={() => handleTypeProduct(1)}>
-          Rèm Cửa
+      <div className="header-container" style={{textAlign: 'center', width: '1600px', marginTop: '52px', height: '20px'}}>
+        <span style={{marginTop: '10px', marginLeft : '-50px',cursor: 'pointer', fontSize:'20px', marginRight:'60px'}} onClick={() => handleTypeProduct("SACHKINHDI")}>
+          Sách Kinh Dị
         </span>
-        <span style={{cursor: 'pointer', fontSize:'20px', marginRight:'60px'}} onClick={() => handleTypeProduct(2)}>
-          Rèm vải
+        <span style={{marginTop: '10px', cursor: 'pointer', fontSize:'20px', marginRight:'60px'}} onClick={() => handleTypeProduct("SACHTINHCAM")}>
+          Sách Tình Yêu
         </span>
-        <span style={{cursor: 'pointer', fontSize:'20px', marginRight:'60px'}} onClick={() => handleTypeProduct(3)}>
-          Rèm Cuốn
+        <span style={{marginTop: '10px', cursor: 'pointer', fontSize:'20px', marginRight:'60px'}} onClick={() => handleTypeProduct("SACHVIENTUONG")}>
+          Sách Viễn Tưởng
         </span>
-        <span style={{cursor: 'pointer', fontSize:'20px', marginRight:'60px'}} onClick={() => handleTypeProduct(4)}>
-          Rèm Roman
+        <span style={{marginTop: '10px', cursor: 'pointer', fontSize:'20px', marginRight:'60px'}} onClick={() => handleTypeProduct("BUTBI")}>
+          Bút Bi
         </span>
-        <span style={{cursor: 'pointer', fontSize:'20px', marginRight:'60px'}} onClick={() => handleTypeProduct(5)}>
-          Rèm văn phòng
+        <span style={{marginTop: '10px', cursor: 'pointer', fontSize:'20px', marginRight:'60px'}} onClick={() => handleTypeProduct("BUTCHI")}>
+          Bút Chì 
         </span>
-        <span style={{cursor: 'pointer', fontSize:'20px', marginRight:'60px'}} onClick={() => handleTypeProduct(6)}>
-          Rèm sáo gỗ
+        <span style={{marginTop: '10px', cursor: 'pointer', fontSize:'20px', marginRight:'60px'}} onClick={() => handleTypeProduct("THUOC")}>
+          Thước
         </span>
-        <span style={{cursor: 'pointer', fontSize:'20px', marginRight:'60px'}} onClick={() => handleTypeProduct(7)}>
-          Rèm sáo nhôm
+        <span style={{marginTop: '10px', cursor: 'pointer', fontSize:'20px', marginRight:'60px'}} onClick={() => handleTypeProduct("GOM")}>
+          Gôm
         </span>
-        <span style={{cursor: 'pointer', fontSize:'20px', marginRight:'60px'}} onClick={() => handleTypeProduct(8)}>
-          Rèm cầu vồng
+        <span style={{marginTop: '10px', cursor: 'pointer', fontSize:'20px', marginRight:'60px'}} onClick={() => handleTypeProduct("HOPBUT")}>
+          Hộp Bút
         </span>
-        <span style={{cursor: 'pointer', fontSize:'20px', marginRight:'60px'}} onClick={() => handleTypeProduct(9)}>
-          Rèm sợi chỉ
+        <span style={{marginTop: '10px', cursor: 'pointer', fontSize:'20px', marginRight:'60px'}} onClick={() => handleTypeProduct("CAP")}>
+          Cặp
         </span>
-        <span style={{cursor: 'pointer', fontSize:'20px', marginRight:'60px'}} onClick={() => handleTypeProduct(10)}>
-          Rèm phòng tắm
-        </span>
+        
         </div>
         <div className='body' style={{ width: '100%', backgroundColor: '#efefef', }}>
-        <div id="container" style={{ height: '100%', width: '1660px', margin: '0 auto' }}>
+        <div id="container" style={{ height: '100%', width: '1600px', margin: '0 auto' }}>
           <SliderComponent arrImages={[s1, s2, s3, s4, s5]} />
           <WrapperProducts>
             {products?.map((product) => {
               return (
                 <CardComponent
-                  ten_rem={product.ten_rem}
-                  hinh_anh={product.hinh_anh}
-                  so_luong={product.so_luong}
-                  gia_goc={product.gia_goc}
-                  xuat_xu={product.xuat_xu}
-                  bao_hanh={product.bao_hanh}
-                  chat_lieu={product.chat_lieu}
-                  don_vi={product.don_vi}
-                  kich_thuoc={product.kich_thuoc}
-                  id={product.id}
+                  Name = {product.Name}
+                  Quantity = {product.Quantity}
+                  Description = {product.Description}
+                  type_ID = {product.type_ID}
+                  Price = {product.PriceApply}
+                  Image = {product.Image }
+                  Id ={product.Id}
                 />
               )
             })}

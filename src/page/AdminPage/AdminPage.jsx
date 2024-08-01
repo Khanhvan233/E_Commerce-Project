@@ -9,6 +9,7 @@ import {
   DatabaseOutlined
 }from '@ant-design/icons'
 import Product from '../../components/Product/Product'
+import Account from '../../components/Account/Account'
 import Statistic from '../../components/Statistic/Statistic'
 import PromotionPage from '../PromotionPage/Promotion'
 import OrderPage from '../OrderPage/OrderPage'
@@ -17,6 +18,7 @@ const AdminPage = () => {
     getItem('Sản Phẩm', 'product', <AppstoreOutlined />),
     getItem('Khuyến mãi', 'discount', <AccountBookOutlined />),
     getItem('Đơn hàng', 'order', <DatabaseOutlined />),
+    getItem('Tài Khoản', 'account', <LineChartOutlined />),
     getItem('Thống Kê', 'statistic', <LineChartOutlined />)
   ]
 
@@ -34,10 +36,14 @@ const AdminPage = () => {
         return (
           <OrderPage/>
         )
-        case 'statistic':
-          return (
-            <Statistic/>
-          )
+      case 'statistic':
+        return (
+          <Statistic/>
+        )
+      case 'account':
+        return (
+          <Account/>
+        )
         default:
           return <></>
     }

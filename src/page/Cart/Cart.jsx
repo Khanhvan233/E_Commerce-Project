@@ -15,18 +15,21 @@ const Cart = () => {
   const [quantity, setQuantity] = useState(1)
   const [stateOrder, setStateOrder] = useState({
     email: "", 
-    dia_chi: "", 
-    sdt: "", 
-    id_trang_thai: "3", 
-    id_hinh_thuc: "", 
-    rems: "",
+    address: "", 
+    phone: "", 
+    total: "",
+    IDstatus: "4", 
+    IDpayment: "", 
+    procs: "",
   })
   const [ dataStorage, setDataStorage] = useState({
-    id: "", 
-    so_luong: "",  
-    gia: "",
-    hinh_anh : "", 
-    con_lai: ""
+   
+    Id : "", 
+    Quantity : "", 
+    remain: "",
+    Image: "", 
+    PriceApply: "", 
+    Name: "",
   });
 
   const [form] = Form.useForm();
@@ -40,15 +43,15 @@ const Cart = () => {
   }
  
  
-  const handleConfirmQuantity = (id, con_lai, hinh_anh, gia, ten_rem) => {
-    utills.deleteCart(id)
+  const handleConfirmQuantity = ( Id , remain, Image, PriceApply, Name) => {
+    utills.deleteCart(Id)
     const data = {
-      id : id,
-      so_luong : quantity,
-      con_lai: con_lai,
-      hinh_anh: hinh_anh,
-      gia:gia,
-      ten_rem:ten_rem,
+      Id : Id,
+      Quantity : quantity,
+      remain: remain,
+      Image: Image,
+      PriceApply:PriceApply,
+      Name: Name,
     }
     utills.saveCart(data);
     window.location.reload();
@@ -56,7 +59,7 @@ const Cart = () => {
   const handleOnSelect = (value) => {
     setStateOrder({
       ...stateOrder,
-      id_hinh_thuc: value
+      IDpayment: value
     });
   };
 
@@ -68,7 +71,7 @@ const Cart = () => {
     }
   
     return localData.reduce((acc, currentItem) => {
-      return acc + (currentItem.so_luong * currentItem.gia);
+      return acc + (currentItem.Quantity * currentItem.PriceApply);
     }, 0);
   };
   
@@ -84,17 +87,19 @@ const Cart = () => {
 
 
   const handleConfirmOrder =() =>{
+    stateOrder.total = totalPrice;
     if (localData && localData.length > 0){
       setStateOrder((prevState) => ({
         ...prevState,
-        rems: localData,
+        procs: localData,
       }));
       console.log(stateOrder)
-      if (stateOrder && stateOrder.rems.length > 0){
+      if (stateOrder && stateOrder.procs.length > 0){
         console.log(stateOrder)
         OrderService.addOrder(stateOrder).then(res => {
           alert(" Thành công")
           setIsModalOpen(false)
+          window.location.reload();
           localStorage.clear();
         }).catch(error => {
           alert(" Thất Bại")
@@ -114,7 +119,7 @@ const Cart = () => {
   }
 
   return (
-    <div style={{background: '#f5f5fa', with: '100%', height: '100%', height:'700px'}}>
+    <div style={{background: '#f5f5fa', with: '100%', height: '100%'}}>
       <div>
         <div style={{width:'1900px', height: '50px', fontSize:'25px', alignContent:'center', display:'flex',justifyContent:'center'  }}>
         </div>
@@ -128,7 +133,7 @@ const Cart = () => {
               return (
             <WrapperItemOrder>
                 <div style={{width: '390px', display: 'flex', alignItems: 'center', gap: 4}}> 
-                  <img src={cart.hinh_anh} style={{width: '77px', height: '79px', objectFit: 'cover'}}/>
+                  <img src={cart.Image} style={{width: '77px', height: '79px', objectFit: 'cover'}}/>
                   <div style={{
                     width: 260,
                     overflow: 'hidden',
@@ -136,31 +141,32 @@ const Cart = () => {
                     whiteSpace:'nowrap',
                     fontSize:'15px',
                     marginLeft: '8px'
-                  }}>{cart.ten_rem}</div>
+                  }}>{cart.Name}</div>
                 </div>
                 <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                   <span>
-                    <span style={{ fontSize: '13px', color: '#242424' }}>{cart.gia}</span>
+                    <span style={{ fontSize: '17px', color: '#242424' }}>{cart.PriceApply}</span>
                   </span>
                   <WrapperCountOrder>
                     <WrapperInputNumber 
-                      defaultValue={cart.so_luong} 
+                      
+                      defaultValue={cart.Quantity} 
                       size="small" min={1}
-                      max={cart.con_lai} 
+                      max={cart.remain} 
                       onChange={handleChangeQuantity}
                     />
                     <Button 
-                      style={{padding:'1px', height:'25px', width: '40px'}} 
-                      onClick={() => handleConfirmQuantity(cart.id, cart.con_lai, cart.hinh_anh, cart.gia, cart.ten_rem)}
+                      style={{padding:'1px', height:'25px', width: '70px', marginLeft:'2px'}} 
+                      onClick={() => handleConfirmQuantity(cart.Id, cart.remain, cart.Image, cart.PriceApply, cart.Name)}
                     >
-                      Oke
+                      Xác nhận
                     </Button>
                   </WrapperCountOrder>
                   
-                  <span style={{color: 'rgb(255, 66, 78)', fontSize: '13px', fontWeight: 500}}>{cart.con_lai}</span>
+                  <span style={{color: 'rgb(255, 66, 78)', fontSize: '13px', fontWeight: 500}}>{cart.remain}</span>
                   <DeleteOutlined style={{cursor: 'pointer'}}
                   onClick={() => {
-                    utills.deleteCart(cart.id);
+                    utills.deleteCart(cart.Id);
                     window.location.reload();
                   }} />
                 </div>
@@ -228,15 +234,15 @@ const Cart = () => {
 
           <Form.Item
             label="Địa chỉ"
-            name="dia_chi"
+            name="address"
             rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
-            <InputComponent value={stateOrder.dia_chi} onChange={handleOnChange} name='dia_chi' />
+            <InputComponent value={stateOrder.address} onChange={handleOnChange} name='address' />
           </Form.Item >
 
           <Form.Item
             label="Số điện thoại"
-            name="sdt"
+            name="phone"
             rules={[
               { required: true, message: 'Không Được Bỏ Trống!' },
               {
@@ -245,19 +251,19 @@ const Cart = () => {
               },
             ]}
           >
-            <InputComponent value={stateOrder.sdt} onChange={handleOnChange} name='sdt' />
+            <InputComponent value={stateOrder.phone} onChange={handleOnChange} name='phone' />
           </Form.Item>
 
           <Form.Item
             label="Hình thức thanh toán"
-            name="id_hinh_thuc"
+            name="IDpayment"
             rules={[{ required: true, message: 'Không Được Bỏ Trống!' }]}
           >
-            <Select value={stateOrder.id_hinh_thuc} onChange={handleOnSelect}
+            <Select value={stateOrder.IDpayment} onChange={handleOnSelect}
               options={[
                 {
                   value: '1',
-                  label: 'MOMO',
+                  label: 'ZaloPay',
                 },
                 {
                   value: '2',

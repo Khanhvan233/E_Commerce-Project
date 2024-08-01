@@ -68,36 +68,34 @@ const NavbarComponent = () => {
     <div style={{background: '#fff'}}>
         <WrapperLabelText>Label</WrapperLabelText>
         < WrapperContent>
-            <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px'}} onClick={() => handleTypeProduct(1)}>
-            Rèm Cửa
+            <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px'}} onClick={() => handleTypeProduct("SACHKINHDI")}>
+            Sách Kinh Dị
             </span>
-            <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px'}} onClick={() => handleTypeProduct(2)}>
-            Rèm vải
+            <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px'}} onClick={() => handleTypeProduct("SACHTINHCAM")}>
+            Sách Tình Yêu
             </span>
-            <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px'}} onClick={() => handleTypeProduct(3)}>
-            Rèm Cuốn
+            <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px'}} onClick={() => handleTypeProduct("SACHVIENTUONG")}>
+            Sách Viễn Tưởng
             </span>
-            <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px'}} onClick={() => handleTypeProduct(4)}>
-            Rèm Roman
+            <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px'}} onClick={() => handleTypeProduct("BUTBI")}>
+            Bút Bi
             </span>
-            <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px'}} onClick={() => handleTypeProduct(5)}>
-            Rèm văn phòng
+            <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px'}} onClick={() => handleTypeProduct("BUTCHI")}>
+            Bút Chì
             </span>
-            <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px'}} onClick={() => handleTypeProduct(6)}>
-            Rèm sáo gỗ
+            <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px'}} onClick={() => handleTypeProduct("THUOC")}>
+            Thước
             </span>
-            <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px'}} onClick={() => handleTypeProduct(7)}>
-            Rèm sáo nhôm
+            <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px'}} onClick={() => handleTypeProduct("GOM")}>
+            Gôm
             </span>
-            <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px'}} onClick={() => handleTypeProduct(8)}>
-            Rèm cầu vồng
+            <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px'}} onClick={() => handleTypeProduct("HOPBUT")}>
+            Hộp Bút
             </span>
-            <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px'}} onClick={() => handleTypeProduct(9)}>
-            Rèm sợi chỉ
+            <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px'}} onClick={() => handleTypeProduct("CAP")}>
+            Cặp
             </span>
-            <span style={{cursor: 'pointer', fontSize:'15px', marginRight:'60px'}} onClick={() => handleTypeProduct(10)}>
-            Rèm phòng tắm
-            </span>
+            
         </WrapperContent>  
     </div>
   )

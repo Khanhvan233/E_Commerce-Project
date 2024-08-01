@@ -20,7 +20,7 @@ const FooterComponent = () => {
         navigate('/momo')
     }
   return (
-    <div style={{width: '100%', background:'rgb(153, 51,, 255)', display:'flex', justifyContent:'center' ,left:'0px', bottom: '0px'}}>
+    <div style={{width: '100%',background:'rgb(153, 51,, 255)',display:'flex', justifyContent:'center' ,left:'0px', bottom: '0px', marginTop: '120px'}}>
         <WrapperFooter>
             
             <Col span={6} style={{display: 'flex', gap:'20px', alignItems:'center', marginLeft: '120px', padding:'-60px' , marginBottom: '45px'}}>
@@ -29,7 +29,7 @@ const FooterComponent = () => {
                         <WrapperTextFooter onClick={handleNavigateMain} style={{cursor: 'pointer'}} >Rèm Cửa Đại Việt</WrapperTextFooter>
                     </Row>
                     <Row>
-                        <WrapperText2 style={{marginBottom: '-10px'}}>Rèm cửa Đại Việt là một dự án được thiết kế cho môn thương mại điện tử nhầm mục đích hiểu rõ cách thiết kế và hoạt động của một trang web thương mại điện tử.</WrapperText2>
+                        <WrapperText2 style={{marginBottom: '-10px'}}>Nhà Sách Tuấn Minh chuyên cung cấp các vật phẩm cần thiết cho việc học như bút thước, ngoài ra còn có cả sách.</WrapperText2>
                     </Row>
                     
                 
@@ -58,7 +58,7 @@ const FooterComponent = () => {
                     
                         <MailOutlined style={{fontSize: '20px', color:'rgb(251, 233, 208)', marginRight: '10px'}} />
                         
-                        <WrapperText4> remcuaDaiViet@gmail.com</WrapperText4>
+                        <WrapperText4> nhasachTuanMinh@gmail.com</WrapperText4>
                     </Row>
                     
                 </div>
@@ -69,20 +69,7 @@ const FooterComponent = () => {
                     
                     <WrapperTextFooter>Bản quyền thuộc về</WrapperTextFooter>
                 </Row>
-                <Row>
-                    <ContactsOutlined style={{fontSize: '20px', color:'rgb(251, 233, 208)' , marginRight: '8px'}} />
-                    <a href='https://www.facebook.com/profile.php?id=100011700110200'>
-                        <WrapperText5 property='Facebook'>Mai Thanh Hải - 0987654321</WrapperText5>
-                    </a>
-                    
-                </Row>
-                <Row>
-                    <ContactsOutlined style={{fontSize: '20px', color:'rgb(251, 233, 208)' , marginRight: '8px'}} />
-                    <a href='https://www.facebook.com/khanhdanbee'>
-                        <WrapperText5 property='Facebook'>Nguyễn Trần Khánh Văn - 0123459876</WrapperText5>
-                    </a>
-                    
-                </Row>
+               
                 <Row>
                     <ContactsOutlined style={{fontSize: '20px', color:'rgb(251, 233, 208)' , marginRight: '8px'}} />
                     <a href='https://www.facebook.com/profile.php?id=100014188711112'>
@@ -95,11 +82,11 @@ const FooterComponent = () => {
                         <span onClick={handleNavigateMomo}  style={{cursor: 'pointer'}}>
                         <img src={iconmomo} style={{ marginRight: '5px', height: '35px' }} />
                         </span>
-                        <a href='https://www.facebook.com/profile.php?id=61559295657021'>
+                        <a href='https://www.facebook.com/profile.php?id=100014188711112'>
                             <FacebookFilled property='Facebook' style={{fontSize: '35px',   }} />
                             
                         </a>
-                        <a href='https://www.instagram.com/khanhdanbee/'>
+                        <a href='https://www.instagram.com/men_dinh1607/'>
                             <InstagramFilled property='Instagram' style={{fontSize: '37px', marginLeft: '5px', color: '#E1306C' }} />
                         </a>   
                     </Space>
